@@ -10,6 +10,7 @@ import SignUp from './components/auth/SignUp'
 import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
+
 import IndexBooks from './IndexBooks'
 
 class App extends Component {
@@ -90,6 +91,10 @@ class App extends Component {
             render={() => (
               <ChangePassword msgAlert={this.msgAlert} user={user} />
             )}
+          />
+          <Route
+            path='/books'
+            render={() => <IndexBooks msgAlert={this.msgAlert} user={user} />}
           />
         </main>
       </Fragment>

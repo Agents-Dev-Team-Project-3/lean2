@@ -18,9 +18,12 @@ class App extends Component {
     super(props)
     this.state = {
       user: null,
-      msgAlerts: []
+      msgAlerts: [],
+      order: []
     }
   }
+
+  setOrder = (order) => this.setState({ order })
 
   setUser = (user) => this.setState({ user })
 
@@ -67,7 +70,7 @@ class App extends Component {
           <Route
             path='/sign-in'
             render={() => (
-              <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
+              <SignIn msgAlert={this.msgAlert} setUser={this.setUser} setOrder={this.setOrder}/>
             )}
           />
           <Route

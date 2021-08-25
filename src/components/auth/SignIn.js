@@ -14,99 +14,116 @@ class SignIn extends Component {
     this.state = {
       email: '',
       password: '',
-      order: []
+      order: {}
     }
   }
 
-  componentDidMount () {
-  // check to see if their is an existing open order owner by the user, else make one
-    const { user } = this.props.user
-    const myOrders = indexOrders(user)
-    const openOrder = myOrders.find(order => order.completed === false)
-    if (!openOrder) {
-      createOrder(user)
-    } else { // add the one found to state
-      this.setState((prevState) => ({
-        ...prevState,
-        order: openOrder
-      }))
-    }
-  }
-
-  // this.setState(prevState => {
-  //   const updatedField = { [event.target.name]: event.target.value }
-
-  //   const editedBook = Object.assign({}, prevState.book, updatedField)
-
-  //   return { book: editedBook }
-  // })
-
-handleChange = (event) =>
-  this.setState({
-    [event.target.name]: event.target.value
-  })
-
-onSignIn = (event) => {
-  event.preventDefault()
-
-  const { msgAlert, history, setUser } = this.props
-
-  signIn(this.state)
-    .then((res) => setUser(res.data.user))
-    .then(() =>
-      msgAlert({
-        heading: 'Sign In Success',
-        message: signInSuccess,
-        variant: 'success'
-      })
-    )
-    .then(() => history.push('/'))
-    .catch((error) => {
-      this.setState({ email: '', password: '' })
-      msgAlert({
-        heading: 'Sign In Failed with error: ' + error.message,
-        message: signInFailure,
-        variant: 'danger'
-      })
+  handleChange = (event) =>
+    this.setState({
+      [event.target.name]: event.target.value
     })
-}
 
-render () {
-  const { email, password } = this.state
+  onSignInSuccess = (user) => {
+    const { setOrder } = this.props
+    console.log('in Sign in success', user)
+    let openOrder
+    indexOrders(user)
+      .then(res => {
+        console.log(res)
+        return (res)
+      })
+      .then(res => {
+        openOrder = res.data.orders.completed === undefined ? res.data.orders : null
+        return openOrder
+      })
+      .then((openOrder) => {
+        console.log(openOrder)
+        return openOrder
+      })
+      .then((openOrder) => {
+        if (!openOrder) {
+          return createOrder(user)
+        } else {
+        // add the one found to state
+          setOrder(openOrder)
+          return null
+        }
+      })
+      .then((res) => {
+        if (res !== null) {
+          setOrder(res.data.order)
+        }
+      })
+      .catch((err) => console.error(err))
+  }
 
-  return (
-    <div className='row'>
-      <div className='col-sm-10 col-md-8 mx-auto mt-5'>
-        <h3>Sign In</h3>
-        <Form onSubmit={this.onSignIn}>
-          <Form.Group controlId='email'>
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              required
-              type='email'
-              name='email'
-              value={email}
-              placeholder='Enter email'
-              onChange={this.handleChange}
-            />
-          </Form.Group>
-          <Form.Group controlId='password'>
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              required
-              name='password'
-              value={password}
-              type='password'
-              placeholder='Password'
-              onChange={this.handleChange}
-            />
-          </Form.Group>
-          <Button variant='primary' type='submit'>Submit</Button>
-        </Form>
+  onSignIn = (event) => {
+    event.preventDefault()
+
+    const { msgAlert, history, setUser } = this.props
+
+    signIn(this.state)
+      .then((res) => {
+        setUser(res.data.user)
+        return (res)
+      })
+      .then((res) => this.onSignInSuccess(res.data.user))
+      .then(() =>
+        msgAlert({
+          heading: 'Sign In Success',
+          message: signInSuccess,
+          variant: 'success'
+        })
+      )
+      .then(() => history.push('/'))
+      .catch((error) => {
+        this.setState({ email: '', password: '' })
+        msgAlert({
+          heading: 'Sign In Failed with error: ' + error.message,
+          message: signInFailure,
+          variant: 'danger'
+        })
+      })
+  }
+
+  render () {
+    const { email, password } = this.state
+
+    return (
+      <div className='row'>
+        <div className='col-sm-10 col-md-8 mx-auto mt-5'>
+          <h3>Sign In</h3>
+          <Form onSubmit={this.onSignIn}>
+            <Form.Group controlId='email'>
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                required
+                type='email'
+                name='email'
+                value={email}
+                placeholder='Enter email'
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId='password'>
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                required
+                name='password'
+                value={password}
+                type='password'
+                placeholder='Password'
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+            <Button variant='primary' type='submit'>
+              Submit
+            </Button>
+          </Form>
+        </div>
       </div>
-    </div>
-  )
-}
+    )
+  }
 }
 
 export default withRouter(SignIn)

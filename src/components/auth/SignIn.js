@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import { signIn } from '../../api/auth'
 import { signInSuccess, signInFailure } from '../AutoDismissAlert/messages'
-
+import { createOrder, indexOrders } from '../../api/orders'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
@@ -13,9 +13,33 @@ class SignIn extends Component {
 
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      order: []
     }
   }
+
+  componentDidMount () {
+  // check to see if their is an existing open order owner by the user, else make one
+    const { user } = this.props.user
+    const myOrders = indexOrders(user)
+    const openOrder = myOrders.find(order => order.completed === false)
+    if (!openOrder) {
+      createOrder(user)
+    } else { // add the one found to state
+      this.setState((prevState) => ({
+        ...prevState,
+        order: openOrder
+      }))
+    }
+  }
+
+  // this.setState(prevState => {
+  //   const updatedField = { [event.target.name]: event.target.value }
+
+  //   const editedBook = Object.assign({}, prevState.book, updatedField)
+
+  //   return { book: editedBook }
+  // })
 
 handleChange = (event) =>
   this.setState({

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { index } from './api/books'
+import { index } from '../src/api/products'
 
 class IndexBooks extends Component {
   constructor (props) {

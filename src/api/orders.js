@@ -21,14 +21,23 @@ export const showOrder = (id) => {
 export const createOrder = (user) => {
   return axios({
     method: 'POST',
-    url: apiUrl + '/orders',
+    url: apiUrl + '/orders/open',
+    headers: {
+      Authorization: `Bearer ${user.token}`,
+    }
+  })
+}
+
+export const updateOrder = (data, user) => {
+  return axios({
+    method: 'PATCH',
+    url: apiUrl + `/orders/${data._id}`,
     headers: {
       Authorization: `Bearer ${user.token}`
     },
     data: {
       order: {
-        contents: [],
-        owner: `${user._id}`
+        contents: data
       }
     }
   })

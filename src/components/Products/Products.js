@@ -9,7 +9,6 @@ const Products = (props) => {
   useEffect(() => {
     index()
       .then((res) => setProducts(res.data.products))
-      .then((res) => console.log(res, products))
       .catch(console.error)
   }, [])
 

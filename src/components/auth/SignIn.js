@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import { signIn } from '../../api/auth'
 import { signInSuccess, signInFailure } from '../AutoDismissAlert/messages'
-import { createOrder, indexOrders } from '../../api/orders'
+import { createOrder } from '../../api/orders'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
@@ -25,37 +25,42 @@ class SignIn extends Component {
 
   onSignInSuccess = (user) => {
     const { setOrder } = this.props
-    console.log('in Sign in success', user)
-    let openOrder
-    indexOrders(user)
-      .then(res => {
-        console.log(res)
-        return (res)
-      })
-      .then(res => {
-        openOrder = res.data.orders.completed === undefined ? res.data.orders : null
-        return openOrder
-      })
-      .then((openOrder) => {
-        console.log(openOrder)
-        return openOrder
-      })
-      .then((openOrder) => {
-        if (!openOrder) {
-          return createOrder(user)
-        } else {
-        // add the one found to state
-          setOrder(openOrder)
-          return null
-        }
-      })
-      .then((res) => {
-        if (res !== null) {
-          setOrder(res.data.order)
-        }
-      })
-      .catch((err) => console.error(err))
+    createOrder(user)
+      .then(res => setOrder(res))
   }
+
+  // console.log('in Sign in success', user)
+  // let openOrder
+  // createOrder(user)
+  //   .then(res => {
+  //     console.log(res)
+  //     return (res)
+  //   })
+  //   .then(res => {
+  //     openOrder = res.data.orders.completed === undefined ? res.data.orders : null
+  //     return openOrder
+  //   })
+  //   .then((openOrder) => {
+  //     console.log(openOrder)
+  //     return openOrder
+  //   })
+  //   .then((openOrder) => {
+  // if (!openOrder) {
+  //   return createOrder(user)
+  // } else {
+  // add the one found to state
+  //         setOrder(openOrder)
+  //         return null
+  //       }
+  //     })
+  //     .then((res) => {
+  //       if (res !== null) {
+  //         console.log(res.data.order)
+  //         setOrder(res.data.order)
+  //       }
+  //     })
+  //     .catch((err) => console.error(err))
+  // }
 
   onSignIn = (event) => {
     event.preventDefault()

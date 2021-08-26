@@ -1,17 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
-
+import { Button } from 'react-bootstrap'
 import { showProduct } from '../../api/products'
+import { updateOrder } from '../../api/orders'
 
 const Products = (props) => {
   const [product, setProduct] = useState(null)
+  const { order, user } = props
 
   useEffect(() => {
     showProduct(props.match.params.id)
       .then((res) => setProduct(res.data.product))
-      .then((res) => console.log(res, product))
       .catch(console.error)
   }, [])
+
+  const handleAddToCart = () => {
+    const newOrder = [...order, product]
+    updateOrder(newOrder, user)
+      .then((res) => console.log(res))
+    // updateOrder(product)
+    //   .then(res => )
+  }
 
   if (!product) {
     return <p>Loading...</p>
@@ -30,6 +39,7 @@ const Products = (props) => {
           <li>{description}</li>
           <li>${price}</li>
         </ul>
+        <Button onClick={handleAddToCart} variant='success'>Add to Cart</Button>{' '}
       </div>
     </div>
   )

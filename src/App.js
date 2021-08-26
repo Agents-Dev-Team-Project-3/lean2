@@ -45,7 +45,7 @@ class App extends Component {
   }
 
   render () {
-    const { msgAlerts, user } = this.state
+    const { msgAlerts, user, order } = this.state
 
     return (
       <Fragment>
@@ -79,7 +79,12 @@ class App extends Component {
           />
           <Route
             path='/products/:id'
-            render={() => <Product msgAlert={this.msgAlert} />}
+            render={() => <Product
+              msgAlert={this.msgAlert}
+              setOrder={this.setOrder}
+              order={order}
+              user={user}
+            />}
           />
           <AuthenticatedRoute
             user={user}

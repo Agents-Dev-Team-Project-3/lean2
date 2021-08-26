@@ -14,13 +14,13 @@ const unauthenticatedOptions = (
   <Fragment>
     <NavLink to='/sign-up' className='nav-link'>Sign Up</NavLink>
     <NavLink to='/sign-in' className='nav-link'>Sign In</NavLink>
-    <NavLink to='/products' className='nav-link'>Products</NavLink>
   </Fragment>
 )
 
 const alwaysOptions = (
   <Fragment>
     <NavLink exact to='/' className='nav-link'>Home</NavLink>
+    <NavLink to='/products' className='nav-link'>Products</NavLink>
   </Fragment>
 )
 

@@ -16,14 +16,33 @@ const Products = (props) => {
 
   const handleAddToCart = () => {
     const oldOrder = order.contents
+    console.log(oldOrder)
+    let matched = false
     const orderObj = {
       id: product._id,
-      quantity: 1
+      quantity: 1,
+      product: product
     }
-    if (oldOrder.length > 0) {
-      oldOrder.includes(product._id) ? orderObj.quantity++ : oldOrder.push(orderObj)
-    } else {
+    // if array is not empty,
+    // iterate and look for a matching id.  If found, increment quantity.
+    if (oldOrder.length === 0) {
       oldOrder.push(orderObj)
+    } else {
+      // iterate each item, if id's match, increment quantity
+      oldOrder.forEach(item => {
+        if (item.id === product._id) {
+          // this will track if we've matched for below boolean
+          matched = true
+          item.quantity++
+        }
+      })
+      // after the forEach if there's no match go ahead and push the object,
+      // we need this tracker boolean, because we don't want to have the case of pushing
+      // multiple time inside the forEach loop.  This gives us a way to remember that there
+      // was no match.  It will false-out if it was turned true.
+      if (matched === false) {
+        oldOrder.push(orderObj)
+      }
     }
 
     const id = order._id

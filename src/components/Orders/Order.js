@@ -9,7 +9,12 @@ const Cart = (props) => {
   const { order } = props
 
   // useEffect(() => {
-  //   index()
+  //   let cartDetails = []
+  //   order.map(item => {
+  //     showProduct(item._id)
+  //       .then((res) => cartDetails.push(res))
+  //     })
+  //       .then()
   //     .then((res) => setProducts(res.data.products))
   //     .catch(console.error)
   // }, [])
@@ -28,24 +33,30 @@ const Cart = (props) => {
     //   .then((res) => setOrder(res.data.order))
     //   .catch((err) => console.error(err))
   }
+  let total = 0
+  const sumTotal = (num) => {
+    total += num
+  }
 
-  const cartContent = order.contents.map((product) => (
-    <ul key={product._id}>
-      <li>{product.name}</li>
+  const cartContent = order.contents.map((item) => (
+    <ul key={item.product._id}>
+      <li>{item.product.name}</li>
       <li>
-        <img src={`${product.image}`} width='200px'></img>
+        <img src={`${item.product.image}`} width='200px'></img>
       </li>
-      <li>{product.description}</li>
-      <li>${product.price}</li>
-      <Button onClick={handleRemove(product._id)} variant='success'>Remove Item</Button>{' '}
-
+      <li>{item.product.description}</li>
+      <li>{item.quantity}</li>
+      <li>${item.product.price}</li>
+      <li>Subtotal: ${item.quantity * item.product.price}</li>
+      {sumTotal((item.quantity * item.product.price))}
+      <Button onClick={handleRemove(item.product._id)} variant='success'>Remove Item</Button>{' '}
     </ul>
   ))
 
   return (
     <div className='row'>
       <div className='col-sm-10 col-md-8 mx-auto mt-5'>
-        <h3>Your Order</h3>
+        <h3>Order Total: ${total}</h3>
         <ul>{cartContent}</ul>
       </div>
     </div>

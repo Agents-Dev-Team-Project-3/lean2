@@ -11,27 +11,38 @@ export const indexOrders = (user) => {
   })
 }
 
-export const showOrder = (id) => {
+export const showOrder = (id, user) => {
   return axios({
     method: 'GET',
-    url: apiUrl + `/orders/${id}`
+    url: apiUrl + `/orders/${id}`,
+    headers: {
+      Authorization: `Bearer ${user.token}`
+    }
   })
 }
 
 export const createOrder = (user) => {
   return axios({
     method: 'POST',
-    url: apiUrl + '/orders/open',
+    url: apiUrl + '/orders',
     headers: {
-      Authorization: `Bearer ${user.token}`,
+      Authorization: `Bearer ${user.token}`
+    },
+    data: {
+      order: {
+        contents: [],
+        owner: user,
+        coupon: '',
+        completed: false
+      }
     }
   })
 }
 
-export const updateOrder = (data, user) => {
+export const updateOrder = (id, data, user) => {
   return axios({
     method: 'PATCH',
-    url: apiUrl + `/orders/${data._id}`,
+    url: apiUrl + `/orders/${id}`,
     headers: {
       Authorization: `Bearer ${user.token}`
     },

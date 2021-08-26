@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 import { showProduct } from '../../api/products'
-import { updateOrder } from '../../api/orders'
+import { updateOrder, showOrder } from '../../api/orders'
 
 const Products = (props) => {
   const [product, setProduct] = useState(null)
-  const { order, user } = props
+  const { order, user, setOrder } = props
 
   useEffect(() => {
     showProduct(props.match.params.id)
@@ -15,11 +15,16 @@ const Products = (props) => {
   }, [])
 
   const handleAddToCart = () => {
-    const newOrder = [...order, product]
-    updateOrder(newOrder, user)
-      .then((res) => console.log(res))
-    // updateOrder(product)
-    //   .then(res => )
+    const oldOrder = order.contents
+    oldOrder.push(product)
+    const id = order._id
+    updateOrder(id, oldOrder, user)
+      .then(() => {
+        console.log('updated! time to show...')
+        return showOrder(id, user)
+      })
+      .then(res => setOrder(res.data.order))
+      .catch(err => console.error(err))
   }
 
   if (!product) {

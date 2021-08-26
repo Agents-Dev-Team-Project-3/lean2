@@ -26,7 +26,10 @@ class SignIn extends Component {
   onSignInSuccess = (user) => {
     const { setOrder } = this.props
     createOrder(user)
-      .then(res => setOrder(res))
+      .then(res => {
+        setOrder(res.data.order)
+        console.log(this.props.order)
+      })
   }
 
   // console.log('in Sign in success', user)

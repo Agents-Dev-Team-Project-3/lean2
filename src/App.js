@@ -19,7 +19,12 @@ class App extends Component {
     this.state = {
       user: null,
       msgAlerts: [],
-      order: []
+      order: {
+        contents: [],
+        owner: this.user,
+        coupon: '',
+        completed: false
+      }
     }
   }
 
@@ -70,7 +75,12 @@ class App extends Component {
           <Route
             path='/sign-in'
             render={() => (
-              <SignIn msgAlert={this.msgAlert} setUser={this.setUser} setOrder={this.setOrder}/>
+              <SignIn
+                msgAlert={this.msgAlert}
+                setUser={this.setUser}
+                setOrder={this.setOrder}
+                order={order}
+              />
             )}
           />
           <Route

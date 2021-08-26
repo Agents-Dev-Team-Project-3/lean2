@@ -16,7 +16,16 @@ const Products = (props) => {
 
   const handleAddToCart = () => {
     const oldOrder = order.contents
-    oldOrder.push(product)
+    const orderObj = {
+      id: product._id,
+      quantity: 1
+    }
+    if (oldOrder.length > 0) {
+      oldOrder.includes(product._id) ? orderObj.quantity++ : oldOrder.push(orderObj)
+    } else {
+      oldOrder.push(orderObj)
+    }
+
     const id = order._id
     updateOrder(id, oldOrder, user)
       .then(() => {

@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import { signIn } from '../../api/auth'
 import { signInSuccess, signInFailure } from '../AutoDismissAlert/messages'
-import { createOrder } from '../../api/orders'
+import { initiateOrder } from '../../api/orders'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
@@ -25,11 +25,10 @@ class SignIn extends Component {
 
   onSignInSuccess = (user) => {
     const { setOrder } = this.props
-    createOrder(user)
-      .then(res => {
-        setOrder(res.data.order)
-        console.log(this.props.order)
-      })
+    initiateOrder(user).then((res) => {
+      setOrder(res.data.order)
+      console.log(this.props.order)
+    })
   }
 
   // console.log('in Sign in success', user)

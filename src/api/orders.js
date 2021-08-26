@@ -20,7 +20,17 @@ export const showOrder = (id, user) => {
     }
   })
 }
-
+// checks to see if user has an open order before making one and will return that order(with contents) if found, (else it will return the new open order)
+export const initiateOrder = (user) => {
+  return axios({
+    method: 'POST',
+    url: apiUrl + '/orders/open',
+    headers: {
+      Authorization: `Bearer ${user.token}`
+    }
+  })
+}
+// Does not check to see if use has an existing open order before making one, leading to the potential for multiple open orders in the database
 export const createOrder = (user) => {
   return axios({
     method: 'POST',

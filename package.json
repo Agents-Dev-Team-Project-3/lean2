@@ -1,6 +1,6 @@
 {
   "homepage": "https://agents-dev-team-project-3.github.io/lean2",
-  "name": "lean2"
+  "name": "lean2",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

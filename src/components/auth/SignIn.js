@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import { signIn } from '../../api/auth'
 import { signInSuccess, signInFailure } from '../AutoDismissAlert/messages'
-import { initiateOrder } from '../../api/orders'
+// import { initiateOrder } from '../../api/orders'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
@@ -23,13 +23,13 @@ class SignIn extends Component {
       [event.target.name]: event.target.value
     })
 
-  onSignInSuccess = (user) => {
-    const { setOrder } = this.props
-    initiateOrder(user).then((res) => {
-      setOrder(res.data.order)
-      console.log(this.props.order)
-    })
-  }
+  // onSignInSuccess = (user) => {
+  //   const { setOrder } = this.props
+  //   initiateOrder(user).then((res) => {
+  //     setOrder(res.data.order)
+  //     console.log(this.props.order)
+  //   })
+  // }
 
   // console.log('in Sign in success', user)
   // let openOrder
@@ -67,14 +67,14 @@ class SignIn extends Component {
   onSignIn = (event) => {
     event.preventDefault()
 
-    const { msgAlert, history, setUser } = this.props
+    const { msgAlert, history, setUser, onSignInSuccess } = this.props
 
     signIn(this.state)
       .then((res) => {
         setUser(res.data.user)
         return (res)
       })
-      .then((res) => this.onSignInSuccess(res.data.user))
+      .then((res) => onSignInSuccess(res.data.user))
       .then(() =>
         msgAlert({
           heading: 'Sign In Success',

@@ -13,6 +13,7 @@ import ChangePassword from './components/auth/ChangePassword'
 import Products from './components/Products/Products'
 import Product from './components/Products/Product'
 import Cart from './components/Orders/Order'
+import { initiateOrder } from './api/orders'
 
 class App extends Component {
   constructor (props) {
@@ -33,7 +34,17 @@ class App extends Component {
 
   setUser = (user) => this.setState({ user })
 
+  clearOrder = () => this.setState({ order: {} })
+
   clearUser = () => this.setState({ user: null })
+
+  onSignInSuccess = (user) => {
+    console.log(user)
+    initiateOrder(user).then((res) => {
+      console.log(res)
+      this.setOrder(res.data.order)
+    })
+  }
 
   deleteAlert = (id) => {
     this.setState((state) => {
@@ -70,7 +81,11 @@ class App extends Component {
           <Route
             path='/sign-up'
             render={() => (
-              <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
+              <SignUp
+                msgAlert={this.msgAlert}
+                setUser={this.setUser}
+                onSignInSuccess={this.onSignInSuccess}
+              />
             )}
           />
           <Route
@@ -80,6 +95,7 @@ class App extends Component {
                 msgAlert={this.msgAlert}
                 setUser={this.setUser}
                 setOrder={this.setOrder}
+                onSignInSuccess={this.onSignInSuccess}
                 order={order}
               />
             )}
@@ -107,6 +123,7 @@ class App extends Component {
               <SignOut
                 msgAlert={this.msgAlert}
                 clearUser={this.clearUser}
+                clearOrder={this.clearOrder}
                 user={user}
               />
             )}

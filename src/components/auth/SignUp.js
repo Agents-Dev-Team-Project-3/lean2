@@ -25,12 +25,16 @@ handleChange = (event) =>
 
 onSignUp = (event) => {
   event.preventDefault()
-
-  const { msgAlert, history, setUser } = this.props
+  const { msgAlert, history, onSignInSuccess, setUser } = this.props
 
   signUp(this.state)
     .then(() => signIn(this.state))
-    .then((res) => setUser(res.data.user))
+    .then((res) => {
+      setUser(res.data.user)
+      console.log(res)
+      return res
+    })
+    .then((res) => onSignInSuccess(res.data.user))
     .then(() =>
       msgAlert({
         heading: 'Sign Up Success',

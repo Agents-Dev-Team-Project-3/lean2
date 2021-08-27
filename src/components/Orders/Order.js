@@ -9,7 +9,7 @@ const Cart = (props) => {
   const { order, user, setOrder } = props
 
   const handleRemove = (event) => {
-    event.preventDefault()
+    // event.preventDefault()
     const targetId = event.target.value
     console.log(targetId)
     // grad the order contents from state bind to oldOrder
@@ -28,11 +28,39 @@ const Cart = (props) => {
     const id = order._id
     updateOrder(id, oldOrder, user)
       .then(() => {
-        console.log('updated! time to show...')
         return showOrder(id, user)
       })
       .then((res) => setOrder(res.data.order))
       .catch((err) => console.error(err))
+  }
+
+  const handleAddOne = (event) => {
+    const targetId = event.target.value
+    const oldOrder = order.contents
+    oldOrder.forEach((item) => {
+      if (item.id === targetId) {
+        item.quantity++
+      }
+    })
+    const id = order._id
+    updateOrder(id, oldOrder, user)
+      .then(() => {
+        return showOrder(id, user)
+      })
+      .then((res) => setOrder(res.data.order))
+      .catch((err) => console.error(err))
+  }
+
+  const handleRemoveAll = (event) => {
+    // event.preventDefault()
+    const targetId = event.target.value
+    const oldOrder = order.contents
+    oldOrder.forEach((item) => {
+      if (item.id === targetId) {
+        item.quantity = 0
+      }
+    })
+    handleRemove(event)
   }
 
   let total = 0
@@ -46,12 +74,14 @@ const Cart = (props) => {
       <li>
         <img src={`${item.product.image}`} width='200px'></img>
       </li>
-      <li>{item.product.description}</li>
-      <li>{item.quantity}</li>
-      <li>${item.product.price}</li>
+      <li>Description: {item.product.description}</li>
+      <li>Quantity: {item.quantity}</li>
+      <li>Price: ${item.product.price}</li>
       <li>Subtotal: ${item.quantity * item.product.price}</li>
       {sumTotal((item.quantity * item.product.price))}
-      <Button value={item.product._id} onClick={handleRemove} variant='success'>Remove Item</Button>{' '}
+      <Button value={item.product._id} onClick={handleRemove} variant='success'>-</Button>{' '}
+      <Button value={item.product._id} onClick={handleAddOne} variant='success'>+</Button>{' '}
+      <Button value={item.product._id} onClick={handleRemoveAll} variant='success'>Remove All</Button>{' '}
     </ul>
   ))
 

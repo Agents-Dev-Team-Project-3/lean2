@@ -10,19 +10,21 @@ const Cart = (props) => {
 
   const handleRemove = (event) => {
     event.preventDefault()
-    const targetId = event.target.dataset.id
+    const targetId = event.target.value
+    console.log(targetId)
     // grad the order contents from state bind to oldOrder
-    const oldOrder = order.contents
+    let oldOrder = order.contents
     // iterate over all order items, when we match our targetId (argument from function call),
     // decrement by one, only if the quantity is 2 or more.  If not, do nothing, deal with
     // this case in the next statement.
     oldOrder.forEach(item => {
-      if (item._id === targetId && item.quantity > 1) {
+      console.log(item.id)
+      if (item.id === targetId && item.quantity > 0) {
         item.quantity--
       }
     })
     // this uses a negative
-    // oldOrder = oldOrder.filter(item => (item.quantity > 1 && item._id !== targetId))
+    oldOrder = oldOrder.filter(item => (item.quantity !== 0))
     const id = order._id
     updateOrder(id, oldOrder, user)
       .then(() => {
@@ -49,7 +51,7 @@ const Cart = (props) => {
       <li>${item.product.price}</li>
       <li>Subtotal: ${item.quantity * item.product.price}</li>
       {sumTotal((item.quantity * item.product.price))}
-      <Button data-key={item.product._id} onClick={handleRemove} variant='success'>Remove Item</Button>{' '}
+      <Button value={item.product._id} onClick={handleRemove} variant='success'>Remove Item</Button>{' '}
     </ul>
   ))
 

@@ -2,6 +2,9 @@
 import React, { Component, Fragment } from 'react'
 import { Route } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
+import { loadStripe } from '@stripe/stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
+import CheckoutForm from './components/Orders/CheckoutForm'
 
 import AuthenticatedRoute from './components/AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from './components/AutoDismissAlert/AutoDismissAlert'
@@ -14,6 +17,10 @@ import Products from './components/Products/Products'
 import Product from './components/Products/Product'
 import Cart from './components/Orders/Order'
 import { initiateOrder } from './api/orders'
+
+const promise = loadStripe(
+  'pk_test_51JS9CaHSvQN3qMqE4F7Y9hKaSrmXTpNlwJH3z1fOItXYo4bkSKWYKTqqNYC2diaE6dgGDlbX12mDtLnzstNDHCAK00HL8Q8w2r'
+)
 
 class App extends Component {
   constructor (props) {
@@ -137,7 +144,7 @@ class App extends Component {
           />
           <AuthenticatedRoute
             user={user}
-            path='/cart'
+            exact path='/cart'
             render={() => (
               <Cart
                 msgAlert={this.msgAlert}
@@ -145,6 +152,17 @@ class App extends Component {
                 order={order}
                 setOrder={this.setOrder}
               />
+            )}
+          />
+          <AuthenticatedRoute
+            user={user}
+            path='/cart/checkout'
+            render={() => (
+              <div className="App">
+                <Elements stripe={promise}>
+                  <CheckoutForm />
+                </Elements>
+              </div>
             )}
           />
         </main>

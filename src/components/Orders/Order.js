@@ -1,5 +1,5 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 import { updateOrder, showOrder } from '../../api/orders'
 
@@ -89,6 +89,8 @@ const Cart = (props) => {
     <div className='row'>
       <div className='col-sm-10 col-md-8 mx-auto mt-5'>
         <h3>Order Total: ${total}</h3>
+        <Button variant="warning"> <Link to='/cart/checkout'>Checkout
+        </Link></Button>
         <ul>{cartContent}</ul>
       </div>
     </div>

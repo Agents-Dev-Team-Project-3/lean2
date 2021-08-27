@@ -1,38 +1,38 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
+import { updateOrder, showOrder } from '../../api/orders'
 
 // import { index } from '../../api/products'
 
 const Cart = (props) => {
-  // const { order, user, setOrder } = this.props
-  const { order } = props
+  const { order, user, setOrder } = props
 
-  // useEffect(() => {
-  //   let cartDetails = []
-  //   order.map(item => {
-  //     showProduct(item._id)
-  //       .then((res) => cartDetails.push(res))
-  //     })
-  //       .then()
-  //     .then((res) => setProducts(res.data.products))
-  //     .catch(console.error)
-  // }, [])
-
-  const handleRemove = (id) => {
-    console.log('...clicked...' + id)
-    // const oldOrder = order.contents
-    // oldOrder.indexOf(product => product._id === id)
-    // console.log(oldOrder)
-    // const id = order._id
-    // updateOrder(id, oldOrder, user)
-    //   .then(() => {
-    //     console.log('updated! time to show...')
-    //     return showOrder(id, user)
-    //   })
-    //   .then((res) => setOrder(res.data.order))
-    //   .catch((err) => console.error(err))
+  const handleRemove = (event) => {
+    event.preventDefault()
+    const targetId = event.target.dataset.id
+    // grad the order contents from state bind to oldOrder
+    const oldOrder = order.contents
+    // iterate over all order items, when we match our targetId (argument from function call),
+    // decrement by one, only if the quantity is 2 or more.  If not, do nothing, deal with
+    // this case in the next statement.
+    oldOrder.forEach(item => {
+      if (item._id === targetId && item.quantity > 1) {
+        item.quantity--
+      }
+    })
+    // this uses a negative
+    // oldOrder = oldOrder.filter(item => (item.quantity > 1 && item._id !== targetId))
+    const id = order._id
+    updateOrder(id, oldOrder, user)
+      .then(() => {
+        console.log('updated! time to show...')
+        return showOrder(id, user)
+      })
+      .then((res) => setOrder(res.data.order))
+      .catch((err) => console.error(err))
   }
+
   let total = 0
   const sumTotal = (num) => {
     total += num
@@ -49,7 +49,7 @@ const Cart = (props) => {
       <li>${item.product.price}</li>
       <li>Subtotal: ${item.quantity * item.product.price}</li>
       {sumTotal((item.quantity * item.product.price))}
-      <Button onClick={handleRemove(item.product._id)} variant='success'>Remove Item</Button>{' '}
+      <Button data-key={item.product._id} onClick={handleRemove} variant='success'>Remove Item</Button>{' '}
     </ul>
   ))
 

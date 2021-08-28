@@ -90,6 +90,7 @@ const Cart = (props) => {
           <Card.Title>{item.product.name}</Card.Title>
           <Card.Text>Description: {item.product.description}</Card.Text>
           <Card.Text>Price: ${item.product.price}</Card.Text>
+          <Card.Text>Quantity: {item.quantity}</Card.Text>
           <Card.Text>Subtotal: ${item.quantity * item.product.price}</Card.Text>
           {sumTotal((item.quantity * item.product.price))}
           <Button style={button} value={item.product._id} onClick={handleRemove} variant='success'>-</Button>{' '}

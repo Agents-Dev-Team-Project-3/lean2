@@ -1,20 +1,21 @@
 {
   "files": {
-    "main.css": "/lean2/static/css/main.7acdaa15.chunk.css",
-    "main.js": "/lean2/static/js/main.44833bc2.chunk.js",
-    "main.js.map": "/lean2/static/js/main.44833bc2.chunk.js.map",
+    "main.css": "/lean2/static/css/main.af0d0472.chunk.css",
+    "main.js": "/lean2/static/js/main.dc1427d3.chunk.js",
+    "main.js.map": "/lean2/static/js/main.dc1427d3.chunk.js.map",
     "runtime-main.js": "/lean2/static/js/runtime-main.4bd992a8.js",
     "runtime-main.js.map": "/lean2/static/js/runtime-main.4bd992a8.js.map",
-    "static/js/2.8acd7c59.chunk.js": "/lean2/static/js/2.8acd7c59.chunk.js",
-    "static/js/2.8acd7c59.chunk.js.map": "/lean2/static/js/2.8acd7c59.chunk.js.map",
+    "static/js/2.9a545955.chunk.js": "/lean2/static/js/2.9a545955.chunk.js",
+    "static/js/2.9a545955.chunk.js.map": "/lean2/static/js/2.9a545955.chunk.js.map",
     "index.html": "/lean2/index.html",
-    "static/css/main.7acdaa15.chunk.css.map": "/lean2/static/css/main.7acdaa15.chunk.css.map",
-    "static/js/2.8acd7c59.chunk.js.LICENSE.txt": "/lean2/static/js/2.8acd7c59.chunk.js.LICENSE.txt"
+    "static/css/main.af0d0472.chunk.css.map": "/lean2/static/css/main.af0d0472.chunk.css.map",
+    "static/js/2.9a545955.chunk.js.LICENSE.txt": "/lean2/static/js/2.9a545955.chunk.js.LICENSE.txt",
+    "static/media/tent-fire.5a5ede83.png": "/lean2/static/media/tent-fire.5a5ede83.png"
   },
   "entrypoints": [
     "static/js/runtime-main.4bd992a8.js",
-    "static/js/2.8acd7c59.chunk.js",
-    "static/css/main.7acdaa15.chunk.css",
-    "static/js/main.44833bc2.chunk.js"
+    "static/js/2.9a545955.chunk.js",
+    "static/css/main.af0d0472.chunk.css",
+    "static/js/main.dc1427d3.chunk.js"
   ]
 }

@@ -85,7 +85,6 @@ const Cart = (props) => {
         <Card.Img variant='top' src={`${item.product.image}`} style={card} />
         <Card.Body>
           <Card.Title>{item.product.name}</Card.Title>
-          <Card.Text>Description: {item.product.description}</Card.Text>
           <Card.Text>Price: ${item.product.price}</Card.Text>
           <Card.Text>Quantity: {item.quantity}</Card.Text>
           <Card.Text>Subtotal: ${item.quantity * item.product.price}</Card.Text>

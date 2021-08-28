@@ -1,8 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
-import { Button } from 'react-bootstrap'
+import { Button, Card } from 'react-bootstrap'
 import { showProduct } from '../../api/products'
 import { updateOrder, showOrder } from '../../api/orders'
+
+const card = {
+  display: 'inline-block',
+  margin: 'auto',
+  width: '75%',
+  padding: '25px'
+}
+
+const button = {
+  width: 'inherit'
+}
 
 const Products = (props) => {
   const [product, setProduct] = useState(null)
@@ -60,19 +71,24 @@ const Products = (props) => {
   }
 
   const { name, image, description, price } = product
+  // const secondary = 'Secondary'
   return (
     <div className='row'>
-      <div className='col-sm-10 col-md-8 mx-auto mt-5'>
-        <h3>Product</h3>
-        <ul>
-          <li>{name}</li>
-          <li>
-            <img src={`${image}`} width='200px'></img>
-          </li>
-          <li>{description}</li>
-          <li>${price}</li>
-        </ul>
-        <Button onClick={handleAddToCart} variant='success'>Add to Cart</Button>{' '}
+      <div className='col-sm-10 col-md-8 m-auto mt-5'>
+        <Card
+          style={{ width: '25rem' }}
+          className="m-auto"
+        >
+          <Card.Img variant='top' src={`${image}`} style={card}/>
+          <Card.Body>
+            <Card.Title>{name}</Card.Title>
+            <Card.Text>{description}</Card.Text>
+            <Card.Text>${price}</Card.Text>
+            <Button style={button} onClick={handleAddToCart} variant='primary'>
+              Add to Cart
+            </Button>{' '}
+          </Card.Body>
+        </Card>
       </div>
     </div>
   )

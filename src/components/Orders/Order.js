@@ -81,21 +81,36 @@ const Cart = (props) => {
 
   const cartContent = order.contents.map((item) => (
     <div key={item.product._id} className='col-3 mt-5'>
-      <Card
-        style={{ width: '25rem' }}
-        className="m-auto"
-      >
-        <Card.Img variant='top' src={`${item.product.image}`} style={card}/>
+      <Card style={{ width: '25rem' }} className='m-auto'>
+        <Card.Img variant='top' src={`${item.product.image}`} style={card} />
         <Card.Body>
           <Card.Title>{item.product.name}</Card.Title>
           <Card.Text>Description: {item.product.description}</Card.Text>
           <Card.Text>Price: ${item.product.price}</Card.Text>
           <Card.Text>Quantity: {item.quantity}</Card.Text>
           <Card.Text>Subtotal: ${item.quantity * item.product.price}</Card.Text>
-          {sumTotal((item.quantity * item.product.price))}
-          <Button style={button} value={item.product._id} onClick={handleRemove} variant='success'>-</Button>{' '}
-          <Button style={button} value={item.product._id} onClick={handleAddOne} variant='success'>+</Button>{' '}
-          <Button style={button} value={item.product._id} onClick={handleRemoveAll} variant='success'>Remove All</Button>{' '}
+          {sumTotal(item.quantity * item.product.price)}
+          <Button
+            style={button}
+            value={item.product._id}
+            onClick={handleRemove}
+            variant='secondary'>
+            -
+          </Button>{' '}
+          <Button
+            style={button}
+            value={item.product._id}
+            onClick={handleAddOne}
+            variant='secondary'>
+            +
+          </Button>{' '}
+          <Button
+            style={button}
+            value={item.product._id}
+            onClick={handleRemoveAll}
+            variant='secondary'>
+            Remove All
+          </Button>{' '}
         </Card.Body>
       </Card>
     </div>

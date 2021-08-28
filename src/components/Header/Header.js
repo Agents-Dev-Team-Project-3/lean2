@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { Link, NavLink } from 'react-router-dom'
-import logo from '../../images/tent-fire.png'
+import logo from '../../images/lean-2-logo.png'
 
 const authenticatedOptions = (
   <Fragment>
@@ -29,7 +29,7 @@ const alwaysOptions = (
 const Header = ({ user }) => (
   <Navbar bg='dark' variant='dark' expand='md'>
     <Navbar.Brand>
-      <Link to='/' style={{ color: '#FFF', textDecoration: 'none', float: 'left !important', marginTop: '-15px !important' }}><img src={logo} style={{ width: '35px', marginTop: '-7' }}/>Lean2</Link>
+      <Link to='/' style={{ color: '#FFF', textDecoration: 'none', float: 'left !important', marginTop: '-15px !important' }}><img src={logo} style={{ width: '250px', marginLeft: '25px', marginTop: '-7' }}/></Link>
     </Navbar.Brand>
     <Navbar.Toggle aria-controls='basic-navbar-nav' />
     <Navbar.Collapse id='basic-navbar-nav'>

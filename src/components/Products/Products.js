@@ -4,9 +4,11 @@ import { Card, Col, Row } from 'react-bootstrap'
 
 import { index } from '../../api/products'
 
-const card = {
+const cardImg = {
   margin: 'auto',
-  padding: '25px'
+  padding: '25px',
+  width: 'auto',
+  height: '200px'
 }
 
 const cardCol = {
@@ -31,11 +33,9 @@ const Products = (props) => {
 
   const productList = products.map((item) => (
     <Col xs={4} key={item._id} style={cardCol}>
-      <Card
-      >
-        <Link to={`/products/${item._id}`}>
-          <Card.Img variant='top' src={`${item.image}`} style={card}/>
-
+      <Card className='m-auto'>
+        <Link style={{ margin: 'auto' }} to={`/products/${item._id}`}>
+          <Card.Img variant='top' src={`${item.image}`} style={cardImg} />
         </Link>
         <Card.Body>
           <Card.Title>{item.name}</Card.Title>

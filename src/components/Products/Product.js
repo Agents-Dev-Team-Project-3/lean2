@@ -83,7 +83,6 @@ const Products = (props) => {
     const id = order._id
     updateOrder(id, oldOrder, user)
       .then(() => {
-        console.log('updated! time to show...')
         return showOrder(id, user)
       })
       .then((res) => setOrder(res.data.order))

@@ -7,7 +7,7 @@ import {
   useElements
 } from '@stripe/react-stripe-js'
 
-export default function CheckoutForm () {
+export default function CheckoutForm (props) {
   const [succeeded, setSucceeded] = useState(false)
   const [error, setError] = useState(null)
   const [processing, setProcessing] = useState('')
@@ -15,6 +15,8 @@ export default function CheckoutForm () {
   const [clientSecret, setClientSecret] = useState('')
   const stripe = useStripe()
   const elements = useElements()
+
+  const { refreshCart, user, order } = props
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
@@ -91,6 +93,7 @@ export default function CheckoutForm () {
       setError(null)
       setProcessing(false)
       setSucceeded(true)
+      refreshCart(order, user)
     }
   }
 
@@ -121,8 +124,13 @@ export default function CheckoutForm () {
         )}
         {/* Show a success message upon completion */}
         <p className={succeeded ? 'result-message' : 'result-message hidden'}>
+<<<<<<< HEAD
           Payment succeeded. Thank you for shopping with Lean2
           <a text='Thank you for your purchase'
+=======
+          Payment succeeded, see the result in your
+          <a
+>>>>>>> a1fa1ee (refreshCart function)
             href={'https://dashboard.stripe.com/test/payments'}
           >
             {' '}

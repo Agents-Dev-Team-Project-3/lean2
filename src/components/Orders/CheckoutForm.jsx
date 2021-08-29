@@ -120,7 +120,7 @@ export default function CheckoutForm () {
           </div>
         )}
         {/* Show a success message upon completion */}
-        <p style="color:white;" className={succeeded ? 'result-message' : 'result-message hidden'}>
+        <p className={succeeded ? 'result-message' : 'result-message hidden'}>
           Payment succeeded, see the result in your
           <a
             href={'https://dashboard.stripe.com/test/payments'}

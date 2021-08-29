@@ -22,7 +22,7 @@ const cardTitle = {
 
 const cardBody = {
   backgroundColor: 'grey',
-  borderRadius: '0px 0px 10px 10px',
+  borderRadius: '0px 0px 8px 8px',
   color: 'white'
 }
 

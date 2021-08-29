@@ -63,3 +63,18 @@ export const updateOrder = (id, data, user) => {
     }
   })
 }
+
+export const completeOrder = (id, user) => {
+  return axios({
+    method: 'PATCH',
+    url: apiUrl + `/orders/${id}`,
+    headers: {
+      Authorization: `Bearer ${user.token}`
+    },
+    data: {
+      order: {
+        completed: true
+      }
+    }
+  })
+}

@@ -16,7 +16,8 @@ import ChangePassword from './components/auth/ChangePassword'
 import Products from './components/Products/Products'
 import Product from './components/Products/Product'
 import Cart from './components/Orders/Order'
-import { initiateOrder } from './api/orders'
+import { initiateOrder, completeOrder } from './api/orders'
+import { checkoutSuccess, checkoutFailure } from './components/AutoDismissAlert/messages'
 
 const promise = loadStripe(
   'pk_test_51JS9CaHSvQN3qMqE4F7Y9hKaSrmXTpNlwJH3z1fOItXYo4bkSKWYKTqqNYC2diaE6dgGDlbX12mDtLnzstNDHCAK00HL8Q8w2r'
@@ -54,12 +55,33 @@ class App extends Component {
     }
   })
 
+  refreshCart = (order, user) => {
+    const id = order._id
+    completeOrder(id, user)
+      .then(() => initiateOrder(user))
+      .then((res) => {
+        this.setOrder(res.data.order)
+      })
+      .then((res) => {
+        this.msgAlert({
+          heading: 'Checkout successful.',
+          message: checkoutSuccess,
+          variant: 'success'
+        })
+      })
+      .catch((err) => {
+        this.msgAlert({
+          heading: 'Checkout failure.' + err,
+          message: checkoutFailure,
+          variant: 'danger'
+        })
+      })
+  }
+
   clearUser = () => this.setState({ user: '' })
 
   onSignInSuccess = (user) => {
-    console.log(user)
     initiateOrder(user).then((res) => {
-      console.log(res)
       this.setOrder(res.data.order)
     })
   }
@@ -85,8 +107,8 @@ class App extends Component {
     return (
       <Fragment>
         <Container fluid style={appContainer}>
-          <Row className="justify-content-center">
-            <Col xs={12} className="m-auto">
+          <Row className='justify-content-center'>
+            <Col xs={12} className='m-auto'>
               <Header user={user} />
               {msgAlerts.map((msgAlert) => (
                 <AutoDismissAlert
@@ -177,7 +199,11 @@ class App extends Component {
               render={() => (
                 <div className='App'>
                   <Elements stripe={promise}>
-                    <CheckoutForm />
+                    <CheckoutForm
+                      refreshCart={this.refreshCart}
+                      user={user}
+                      order={order}
+                    />
                   </Elements>
                 </div>
               )}

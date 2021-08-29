@@ -47,7 +47,7 @@ const Products = (props) => {
   // ))
 
   const productList = products.map((item) => (
-    <Col xs={4} key={item._id} style={cardCol}>
+    <Col xs={12} md={6} lg={4} xl={3} key={item._id} style={cardCol}>
       <Card style={card} className='m-auto'>
         <Link style={{ margin: 'auto' }} to={`/products/${item._id}`}>
           <Card.Img variant='top' src={`${item.image}`} style={cardImg} />

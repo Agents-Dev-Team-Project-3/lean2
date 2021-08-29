@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
-import { Button, Card } from 'react-bootstrap'
+import { Button, Card, Row, Col } from 'react-bootstrap'
 import { showProduct } from '../../api/products'
 import { updateOrder, showOrder } from '../../api/orders'
 import {
@@ -9,10 +9,30 @@ import {
 } from '../AutoDismissAlert/messages'
 
 const card = {
-  display: 'inline-block',
+  border: 'none',
+  borderRadius: '10px'
+}
+
+const cardImg = {
   margin: 'auto',
-  width: '75%',
-  padding: '25px'
+  padding: '25px',
+  width: 'auto',
+  height: '200px'
+}
+
+const cardTitle = {
+  height: '50px'
+}
+
+const cardCol = {
+  margin: 'auto',
+  marginTop: '10px'
+}
+
+const cardBody = {
+  backgroundColor: 'grey',
+  borderRadius: '0px 0px 8px 8px',
+  color: 'white'
 }
 
 const button = {
@@ -90,15 +110,15 @@ const Products = (props) => {
   const { name, image, description, price } = product
   // const secondary = 'Secondary'
   return (
-    <div className='row'>
-      <div className='col-sm-10 col-md-8 m-auto mt-5'>
+    <Row>
+      <Col xs={10} md={8} style={cardCol}>
         <Card
-          style={{ width: '25rem' }}
+          style={card}
           className="m-auto"
         >
-          <Card.Img variant='top' src={`${image}`} style={card}/>
-          <Card.Body>
-            <Card.Title>{name}</Card.Title>
+          <Card.Img variant='top' src={`${image}`} style={cardImg}/>
+          <Card.Body style={cardBody}>
+            <Card.Title style={cardTitle}>{name}</Card.Title>
             <Card.Text>{description}</Card.Text>
             <Card.Text>${price}</Card.Text>
             <Button style={button} onClick={handleAddToCart} variant='primary'>
@@ -106,8 +126,8 @@ const Products = (props) => {
             </Button>{' '}
           </Card.Body>
         </Card>
-      </div>
-    </div>
+      </Col>
+    </Row>
   )
 }
 

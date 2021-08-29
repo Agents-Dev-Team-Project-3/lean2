@@ -16,6 +16,10 @@ const cardCol = {
   marginTop: '10px'
 }
 
+const cardTitle = {
+  height: '50px'
+}
+
 const Products = (props) => {
   const [products, setProducts] = useState([])
 
@@ -38,7 +42,7 @@ const Products = (props) => {
           <Card.Img variant='top' src={`${item.image}`} style={cardImg} />
         </Link>
         <Card.Body>
-          <Card.Title>{item.name}</Card.Title>
+          <Card.Title style={cardTitle}>{item.name}</Card.Title>
           <Card.Text>Price: ${item.price}</Card.Text>
         </Card.Body>
       </Card>

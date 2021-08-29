@@ -121,13 +121,12 @@ export default function CheckoutForm () {
         )}
         {/* Show a success message upon completion */}
         <p className={succeeded ? 'result-message' : 'result-message hidden'}>
-          Payment succeeded, see the result in your
-          <a
+          Payment succeeded. Thank you for shopping with Lean2
+          <a text='Thank you for your purchase'
             href={'https://dashboard.stripe.com/test/payments'}
           >
             {' '}
-            Stripe dashboard.
-          </a> Refresh the page to pay again.
+          </a>
         </p>
       </form>
     </div>

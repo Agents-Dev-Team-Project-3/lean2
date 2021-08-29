@@ -25,7 +25,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "resolve": "^1.18.1",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "webfontloader": "^1.6.28"
   },
   "scripts": {
     "start": "PORT=7165 react-scripts start",

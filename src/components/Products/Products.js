@@ -20,6 +20,17 @@ const cardTitle = {
   height: '50px'
 }
 
+const cardBody = {
+  backgroundColor: 'grey',
+  borderRadius: '0px 0px 10px 10px',
+  color: 'white'
+}
+
+const card = {
+  border: 'none',
+  borderRadius: '10px'
+}
+
 const Products = (props) => {
   const [products, setProducts] = useState([])
 
@@ -37,11 +48,11 @@ const Products = (props) => {
 
   const productList = products.map((item) => (
     <Col xs={4} key={item._id} style={cardCol}>
-      <Card className='m-auto'>
+      <Card style={card} className='m-auto'>
         <Link style={{ margin: 'auto' }} to={`/products/${item._id}`}>
           <Card.Img variant='top' src={`${item.image}`} style={cardImg} />
         </Link>
-        <Card.Body>
+        <Card.Body style={cardBody}>
           <Card.Title style={cardTitle}>{item.name}</Card.Title>
           <Card.Text>Price: ${item.price}</Card.Text>
         </Card.Body>

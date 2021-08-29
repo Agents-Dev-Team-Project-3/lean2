@@ -3,6 +3,10 @@ import { withRouter } from 'react-router-dom'
 import { Button, Card } from 'react-bootstrap'
 import { showProduct } from '../../api/products'
 import { updateOrder, showOrder } from '../../api/orders'
+import {
+  addedToCartFailure,
+  addedToCartSuccess
+} from '../AutoDismissAlert/messages'
 
 const card = {
   display: 'inline-block',
@@ -17,7 +21,7 @@ const button = {
 
 const Products = (props) => {
   const [product, setProduct] = useState(null)
-  const { order, user, setOrder } = props
+  const { order, user, setOrder, msgAlert } = props
 
   useEffect(() => {
     showProduct(props.match.params.id)
@@ -62,8 +66,21 @@ const Products = (props) => {
         console.log('updated! time to show...')
         return showOrder(id, user)
       })
-      .then(res => setOrder(res.data.order))
-      .catch(err => console.error(err))
+      .then((res) => setOrder(res.data.order))
+      .then(() =>
+        msgAlert({
+          heading: 'Added to Cart...',
+          message: addedToCartSuccess,
+          variant: 'success'
+        })
+      )
+      .catch(() => {
+        msgAlert({
+          heading: 'Could not add to Cart.',
+          message: addedToCartFailure,
+          variant: 'danger'
+        })
+      })
   }
 
   if (!product) {

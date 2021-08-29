@@ -5,3 +5,5 @@ export const signInFailure = 'Failed to sign in. Check your email and password a
 export const signOutSuccess = 'Come back soon!'
 export const changePasswordSuccess = 'Password changed successfully!'
 export const changePasswordFailure = 'Failed to change passwords. Check your old password and try again.'
+export const addedToCartSuccess = 'Successfully added item to cart.'
+export const addedToCartFailure = 'Please sign in or sign up for an account.'

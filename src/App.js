@@ -30,7 +30,7 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      user: null,
+      user: '',
       msgAlerts: [],
       order: {
         contents: [],
@@ -45,9 +45,16 @@ class App extends Component {
 
   setUser = (user) => this.setState({ user })
 
-  clearOrder = () => this.setState({ order: {} })
+  clearOrder = () => this.setState({
+    order: {
+      contents: [],
+      owner: this.user,
+      coupon: '',
+      completed: false
+    }
+  })
 
-  clearUser = () => this.setState({ user: null })
+  clearUser = () => this.setState({ user: '' })
 
   onSignInSuccess = (user) => {
     console.log(user)

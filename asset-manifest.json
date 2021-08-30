@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/lean2/static/css/main.f582019a.chunk.css",
-    "main.js": "/lean2/static/js/main.1a1a87db.chunk.js",
-    "main.js.map": "/lean2/static/js/main.1a1a87db.chunk.js.map",
+    "main.js": "/lean2/static/js/main.fcd9941d.chunk.js",
+    "main.js.map": "/lean2/static/js/main.fcd9941d.chunk.js.map",
     "runtime-main.js": "/lean2/static/js/runtime-main.4bd992a8.js",
     "runtime-main.js.map": "/lean2/static/js/runtime-main.4bd992a8.js.map",
     "static/js/2.853886d1.chunk.js": "/lean2/static/js/2.853886d1.chunk.js",
@@ -10,12 +10,12 @@
     "index.html": "/lean2/index.html",
     "static/css/main.f582019a.chunk.css.map": "/lean2/static/css/main.f582019a.chunk.css.map",
     "static/js/2.853886d1.chunk.js.LICENSE.txt": "/lean2/static/js/2.853886d1.chunk.js.LICENSE.txt",
-    "static/media/lean-2-logo-alt2.a4ec299a.png": "/lean2/static/media/lean-2-logo-alt2.a4ec299a.png"
+    "static/media/lean-2-logo-alt2.ba103132.png": "/lean2/static/media/lean-2-logo-alt2.ba103132.png"
   },
   "entrypoints": [
     "static/js/runtime-main.4bd992a8.js",
     "static/js/2.853886d1.chunk.js",
     "static/css/main.f582019a.chunk.css",
-    "static/js/main.1a1a87db.chunk.js"
+    "static/js/main.fcd9941d.chunk.js"
   ]
 }

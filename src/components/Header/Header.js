@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react'
-import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/Navbar'
+import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { Link, NavLink } from 'react-router-dom'
 import logo from '../../images/lean-2-logo-alt2.png'
 
@@ -22,15 +21,42 @@ const unauthenticatedOptions = (
 
 const alwaysOptions = (
   <Fragment>
-    <NavLink exact to='/' className='nav-link'>Home</NavLink>
-    <NavLink to='/products' className='nav-link'>Products</NavLink>
+    <NavLink exact to='/' className='nav-link'>
+      Home
+    </NavLink>
+    <NavLink to='/products' className='nav-link'>
+      Products
+    </NavLink>
+    <NavDropdown
+      id='nav-dropdown-dark-example'
+      title='Dropdown'
+      menuVariant='dark'>
+      <NavDropdown.Item href='#action/3.1'>Tents</NavDropdown.Item>
+      <NavDropdown.Item href='#action/3.2'>Backpacks</NavDropdown.Item>
+      <NavDropdown.Item href='#action/3.3'>Footwear</NavDropdown.Item>
+      <NavDropdown.Item href='#action/3.4'>
+        Camping Accessories
+      </NavDropdown.Item>
+    </NavDropdown>
   </Fragment>
 )
 
 const Header = ({ user }) => (
   <Navbar bg='dark' variant='dark' expand='md'>
     <Navbar.Brand>
-      <Link to='/' style={{ color: '#FFF', textDecoration: 'none', float: 'left !important', marginTop: '-15px !important' }}><img src={logo} style={{ width: '250px', marginLeft: '25px', marginTop: '-7' }}/></Link>
+      <Link
+        to='/'
+        style={{
+          color: '#FFF',
+          textDecoration: 'none',
+          float: 'left !important',
+          marginTop: '-15px !important'
+        }}>
+        <img
+          src={logo}
+          style={{ width: '250px', marginLeft: '25px', marginTop: '-7' }}
+        />
+      </Link>
     </Navbar.Brand>
     <Navbar.Toggle aria-controls='basic-navbar-nav' />
     <Navbar.Collapse id='basic-navbar-nav'>

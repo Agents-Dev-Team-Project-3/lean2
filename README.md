@@ -20,11 +20,24 @@ Zachary Kogan zacharykogan@gmail.com
 
 Pablo Maldonado-Hernandez pmhernandez2001@gmail.com
 
+
 ---
 
-This is V1.
+Technologies Used:
 
+JavaScript
+
+React.js
+
+React Stripe.js 
+
+React-Bootstrap
+
+Axios
+
+---
 User Story:
+
 As an unregistered user, I can sign up with email and password.
 As a registered user, I can sign in with email and password.
 As a signed in user, I can change password.
@@ -40,3 +53,8 @@ Wireframes
 ![LEAN2](https://i.ibb.co/db72XdY/camp-io-pg-2.png)
 
 ![LEAN2](https://i.ibb.co/55SZh5h/camp-io-pg-3.png)
+---
+
+This is V1.
+
+Future version will include search by name functionality and many UI imporvements.

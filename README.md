@@ -1,6 +1,7 @@
 ![Lean2](./public/tent-fire.png) Welcome to Lean2!
+App URL: https://agents-dev-team-project-3.github.io/lean2/
 
-https://agents-dev-team-project-3.github.io/lean2/
+API URL: https://github.com/Agents-Dev-Team-Project-3/lean2-api
 
 Lean 2 is an e-commerce site where you’ll find outdoor gear and clothing for every budget and skill level. This is camping, hiking, trail running, mountain biking, skiing, mountaineering, backpacking and more—all under one lean-to.
 ----

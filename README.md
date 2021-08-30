@@ -32,8 +32,8 @@ ERD
 ![Lean2](../../Project3/project-3-client/build/project-3-erd.png) Welcome to Lean2!
 
 Wireframes
-![LEAN2](../../Project3/project-3-client/public/camp.io-pg-1.png)
+![LEAN2](https://i.ibb.co/yQ95nKX/camp-io-pg-1.png)
 
-![LEAN2](../../Project3/project-3-client/public/camp.io-pg-2.png)
+![LEAN2](https://i.ibb.co/db72XdY/camp-io-pg-2.png)
 
-![LEAN2](../../Project3/project-3-client/public/camp.io-pg-3.png)
+![LEAN2](https://i.ibb.co/55SZh5h/camp-io-pg-3.png)

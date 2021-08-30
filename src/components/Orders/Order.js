@@ -19,7 +19,7 @@ const card = {
 const Cart = (props) => {
   const { order, user, setOrder } = props
 
-  const handleRemove = (event) => {
+  const handleRemoveOne = (event) => {
     // event.preventDefault()
     const targetId = event.target.value
     console.log(targetId)
@@ -71,7 +71,7 @@ const Cart = (props) => {
         item.quantity = 0
       }
     })
-    handleRemove(event)
+    handleRemoveOne(event)
   }
 
   let total = 0
@@ -92,7 +92,7 @@ const Cart = (props) => {
           <Button
             style={button}
             value={item.product._id}
-            onClick={handleRemove}
+            onClick={handleRemoveOne}
             variant='secondary'>
             -
           </Button>{' '}

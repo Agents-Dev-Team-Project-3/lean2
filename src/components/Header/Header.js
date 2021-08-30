@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { Link, NavLink } from 'react-router-dom'
-import logo from '../../images/lean-2-logo.png'
+import logo from '../../images/lean-2-logo-alt1.png'
 
 const authenticatedOptions = (
   <Fragment>

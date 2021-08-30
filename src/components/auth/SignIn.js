@@ -23,47 +23,6 @@ class SignIn extends Component {
       [event.target.name]: event.target.value
     })
 
-  // onSignInSuccess = (user) => {
-  //   const { setOrder } = this.props
-  //   initiateOrder(user).then((res) => {
-  //     setOrder(res.data.order)
-  //     console.log(this.props.order)
-  //   })
-  // }
-
-  // console.log('in Sign in success', user)
-  // let openOrder
-  // createOrder(user)
-  //   .then(res => {
-  //     console.log(res)
-  //     return (res)
-  //   })
-  //   .then(res => {
-  //     openOrder = res.data.orders.completed === undefined ? res.data.orders : null
-  //     return openOrder
-  //   })
-  //   .then((openOrder) => {
-  //     console.log(openOrder)
-  //     return openOrder
-  //   })
-  //   .then((openOrder) => {
-  // if (!openOrder) {
-  //   return createOrder(user)
-  // } else {
-  // add the one found to state
-  //         setOrder(openOrder)
-  //         return null
-  //       }
-  //     })
-  //     .then((res) => {
-  //       if (res !== null) {
-  //         console.log(res.data.order)
-  //         setOrder(res.data.order)
-  //       }
-  //     })
-  //     .catch((err) => console.error(err))
-  // }
-
   onSignIn = (event) => {
     event.preventDefault()
 

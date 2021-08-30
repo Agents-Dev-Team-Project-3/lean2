@@ -1,9 +1,14 @@
-![Lean2](./public/tent-fire.png) Welcome to Lean2!
+Welcome to Lean2
+
+<img src="https://i.ibb.co/s525gB9/tent-fire-copy.png" alt="drawing" width="100"/>
+
 App URL: https://agents-dev-team-project-3.github.io/lean2/
 
-API URL: https://github.com/Agents-Dev-Team-Project-3/lean2-api
+API URL: https://afternoon-springs-15413.herokuapp.com
 
-Lean 2 is an e-commerce site where you’ll find outdoor gear and clothing for every budget and skill level. This is camping, hiking, trail running, mountain biking, skiing, mountaineering, backpacking and more—all under one lean-to.
+API Repo: https://github.com/Agents-Dev-Team-Project-3/lean2-api
+
+Lean 2 is an e-commerce site where you’ll find outdoor gear and clothing for every budget and skill level. This is camping, hiking, trail running, mountain biking, skiing, mountaineering, backpacking and more, all under one lean-to.
 ----
 The site was created using React.js and Stripe.js as part of a team project for General Assembly's Software Engineering Intensive in August 2021 by the following team of software developers:
 
@@ -28,9 +33,6 @@ As an unregistered user, I can see all of the products.
 As a signed in user, I can add and remove products from a shopping cart.
 As a signed in user, I can purchase products in a shopping cart using Stripe with react https://github.com/azmenak/react-stripe-checkout
 As a signed in user, I can see all my past orders.
-
-ERD
-![Lean2](../../Project3/project-3-client/build/project-3-erd.png) Welcome to Lean2!
 
 Wireframes
 ![LEAN2](https://i.ibb.co/yQ95nKX/camp-io-pg-1.png)

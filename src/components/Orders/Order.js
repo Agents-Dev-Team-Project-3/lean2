@@ -22,20 +22,19 @@ const Cart = (props) => {
   const handleRemoveOne = (event) => {
     // event.preventDefault()
     const targetId = event.target.value
-    console.log(targetId)
     // grad the order contents from state bind to oldOrder
     let oldOrder = order.contents
     // iterate over all order items, when we match our targetId (argument from function call),
-    // decrement by one, only if the quantity is 2 or more.  If not, do nothing, deal with
+    // decrement by one, only if the quantity is 1 or more.  If not, do nothing, deal with
     // this case in the next statement.
     oldOrder.forEach(item => {
-      console.log(item.id)
       if (item.id === targetId && item.quantity > 0) {
         item.quantity--
       }
     })
-    // this uses a negative
+    // this uses a negative condition for the boolean to delete a zero amount
     oldOrder = oldOrder.filter(item => (item.quantity !== 0))
+    // now updates the order array at the API level.
     const id = order._id
     updateOrder(id, oldOrder, user)
       .then(() => {
@@ -46,13 +45,17 @@ const Cart = (props) => {
   }
 
   const handleAddOne = (event) => {
+    // getting id from the value stored on the card in the DOM
     const targetId = event.target.value
+    // variable to hold our state order object
     const oldOrder = order.contents
+    // iterate through all our order and increment where the id's match
     oldOrder.forEach((item) => {
       if (item.id === targetId) {
         item.quantity++
       }
     })
+    // API call to update the order
     const id = order._id
     updateOrder(id, oldOrder, user)
       .then(() => {
@@ -63,14 +66,17 @@ const Cart = (props) => {
   }
 
   const handleRemoveAll = (event) => {
-    // event.preventDefault()
+    // pull ID from DOM element we clicked
     const targetId = event.target.value
+    // hold our state object in a local variable
     const oldOrder = order.contents
+    // iterate through and find the matching ID and set quantity to 0
     oldOrder.forEach((item) => {
       if (item.id === targetId) {
         item.quantity = 0
       }
     })
+    // call handle removeOne to delete out of the cart.
     handleRemoveOne(event)
   }
 

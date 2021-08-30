@@ -13,7 +13,6 @@ class IndexBooks extends Component {
 
   componentDidMount () {
     index()
-      // .then((response) => console.log(response))
       .then((response) =>
         this.setState({
           books: response.data.books,
@@ -21,7 +20,6 @@ class IndexBooks extends Component {
         })
       )
       .catch(console.error)
-    console.log(this.state)
   }
 
   render () {

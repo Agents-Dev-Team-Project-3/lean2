@@ -51,7 +51,6 @@ const Products = (props) => {
 
   const handleAddToCart = () => {
     const oldOrder = order.contents
-    console.log(oldOrder)
     let matched = false
     const orderObj = {
       id: product._id,

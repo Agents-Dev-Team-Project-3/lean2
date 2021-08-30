@@ -31,7 +31,6 @@ onSignUp = (event) => {
     .then(() => signIn(this.state))
     .then((res) => {
       setUser(res.data.user)
-      console.log(res)
       return res
     })
     .then((res) => onSignInSuccess(res.data.user))

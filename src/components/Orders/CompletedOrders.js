@@ -9,7 +9,6 @@ const CompletedOrders = (props) => {
   useEffect(() => {
     indexOrders(user)
       .then((res) => {
-        console.log(res)
         const orders = res.data.orders.filter((order) => order.completed)
         return orders
       })

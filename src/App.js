@@ -17,6 +17,7 @@ import Products from './components/Products/Products'
 import Product from './components/Products/Product'
 import Cart from './components/Orders/Order'
 import { initiateOrder, completeOrder } from './api/orders'
+import CompletedOrders from './components/Orders/CompletedOrders'
 import { checkoutSuccess, checkoutFailure } from './components/AutoDismissAlert/messages'
 
 const promise = loadStripe(
@@ -206,6 +207,16 @@ class App extends Component {
                     />
                   </Elements>
                 </div>
+              )}
+            />
+            <AuthenticatedRoute
+              user={user}
+              path='/orders/order-history'
+              render={() => (
+                <CompletedOrders
+                  msgAlert={this.msgAlert}
+                  user={user}
+                />
               )}
             />
           </main>

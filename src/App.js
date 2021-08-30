@@ -152,7 +152,7 @@ class App extends Component {
               exact
               path='/products'
               // new prop to show only the clicked-on category
-              category={products.data.category}
+              // category={products.data.category}
               render={() => <Products msgAlert={this.msgAlert} />}
             />
             <Route

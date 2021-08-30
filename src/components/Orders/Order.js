@@ -93,7 +93,9 @@ const Cart = (props) => {
           <Card.Title>{item.product.name}</Card.Title>
           <Card.Text>Price: ${item.product.price}</Card.Text>
           <Card.Text>Quantity: {item.quantity}</Card.Text>
-          <Card.Text>Subtotal: ${item.quantity * item.product.price}</Card.Text>
+          <Card.Text>
+            Subtotal: ${Math.round((item.quantity * item.product.price) * 100) / 100}
+          </Card.Text>
           {sumTotal(item.quantity * item.product.price)}
           <Button
             style={button}

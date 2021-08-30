@@ -39,7 +39,9 @@ class App extends Component {
         owner: this.user,
         coupon: '',
         completed: false
-      }
+      },
+      // state object to hold all products in array
+      products: []
     }
   }
 
@@ -149,6 +151,8 @@ class App extends Component {
             <Route
               exact
               path='/products'
+              // new prop to show only the clicked-on category
+              category={products.data.category}
               render={() => <Products msgAlert={this.msgAlert} />}
             />
             <Route

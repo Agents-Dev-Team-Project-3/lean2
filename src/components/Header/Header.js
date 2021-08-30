@@ -19,23 +19,55 @@ const unauthenticatedOptions = (
   </Fragment>
 )
 
+// create dynamic menu that maps each link in the dropdown according to the category from parent props.
+// mapping this:
+
+// <NavDropdown.Item>
+//   {' '}
+//   <NavLink to='/products/{category}' className='nav-link text-dark'>
+//     {category}
+//   </NavLink>
+// </NavDropdown.Item>
+
 const alwaysOptions = (
   <Fragment>
     <NavLink exact to='/' className='nav-link'>
       Home
     </NavLink>
-    <NavLink to='/products' className='nav-link'>
-      Products
-    </NavLink>
     <NavDropdown
       id='nav-dropdown-dark-example'
-      title='Dropdown'
+      title='Products'
       menuVariant='dark'>
-      <NavDropdown.Item href='#action/3.1'>Tents</NavDropdown.Item>
-      <NavDropdown.Item href='#action/3.2'>Backpacks</NavDropdown.Item>
-      <NavDropdown.Item href='#action/3.3'>Footwear</NavDropdown.Item>
-      <NavDropdown.Item href='#action/3.4'>
-        Camping Accessories
+      <NavDropdown.Item>
+        {' '}
+        <NavLink to='/products' className='nav-link text-dark'>
+          All Products
+        </NavLink>
+      </NavDropdown.Item>
+      <NavDropdown.Item>
+        {' '}
+        <NavLink to='/products/tents' className='nav-link text-dark'>
+          Tents
+        </NavLink>
+      </NavDropdown.Item>
+      <NavDropdown.Item>
+        {' '}
+        <NavLink to='/products/backpacks' className='nav-link text-dark'>
+          Backpacks
+        </NavLink>
+      </NavDropdown.Item>
+      <NavDropdown.Item>
+        {' '}
+        <NavLink to='/products/footwear' className='nav-link text-dark'>
+          Footwear
+        </NavLink>
+      </NavDropdown.Item>
+      <NavDropdown.Item>
+        <NavLink
+          to='/products/camping-accessories'
+          className='nav-link text-dark'>
+          Camping Accessories
+        </NavLink>{' '}
       </NavDropdown.Item>
     </NavDropdown>
   </Fragment>

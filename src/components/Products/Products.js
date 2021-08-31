@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { Card, Col, Row } from 'react-bootstrap'
-
-import { index } from '../../api/products'
 
 const cardImg = {
   margin: 'auto',
@@ -32,21 +30,17 @@ const card = {
 }
 
 const Products = (props) => {
-  const [products, setProducts] = useState([])
+  // coming in from props, from clicking on the dropdown menu
+  const { category, products } = props
+  console.log(category)
 
-  useEffect(() => {
-    index()
-      .then((res) => setProducts(res.data.products))
-      .catch(console.error)
-  }, [])
+  const filteredProducts = products.filter((item) =>
+    item.category === category)
+  console.log(filteredProducts)
 
-  // const productList = products.map((product) => (
-  //   <li key={product._id}>
-  //     <Link to={`/products/${product._id}`}>{product.name}</Link>
-  //   </li>
-  // ))
+  // console.log(products)
 
-  const productList = products.map((item) => (
+  const productList = filteredProducts.map((item) => (
     <Col xs={12} md={6} lg={4} xl={4} key={item._id} style={cardCol}>
       <Card style={card} className='m-auto'>
         <Link style={{ margin: 'auto' }} to={`/products/${item._id}`}>
@@ -65,7 +59,7 @@ const Products = (props) => {
 
   return (
     <Row>
-      <h3 className='text-light'>Products</h3>
+      <h3 className='text-light'>{category}</h3>
       <Col xs={12} style={{ marginTop: '10px' }}>
         <Row>{productList}</Row>
       </Col>

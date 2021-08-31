@@ -17,6 +17,7 @@ import Products from './components/Products/Products'
 import Product from './components/Products/Product'
 import Cart from './components/Orders/Order'
 import { initiateOrder, completeOrder } from './api/orders'
+import { index } from './api/products'
 import CompletedOrders from './components/Orders/CompletedOrders'
 import { checkoutSuccess, checkoutFailure } from './components/AutoDismissAlert/messages'
 
@@ -40,9 +41,18 @@ class App extends Component {
         coupon: '',
         completed: false
       },
-      // state object to hold all products in array
-      products: []
+      // state object to hold the category on the product page
+      products: [],
+      category: ''
     }
+  }
+
+  componentDidMount () {
+    // api call for products
+    index()
+      .then((res) => this.setState({ products: res.data.products }))
+      .then((res) => console.log(res))
+      .catch(console.error)
   }
 
   setOrder = (order) => this.setState({ order })
@@ -57,6 +67,8 @@ class App extends Component {
       completed: false
     }
   })
+
+  setCategory = (category) => this.setState({ category })
 
   refreshCart = (order, user) => {
     const id = order._id
@@ -104,15 +116,21 @@ class App extends Component {
     })
   }
 
+  // need to populate dynamic routes for products, will map it into 'main' into a
+
   render () {
-    const { msgAlerts, user, order } = this.state
+    const { msgAlerts, user, order, products, category } = this.state
 
     return (
       <Fragment>
         <Container fluid style={appContainer}>
           <Row className='justify-content-center'>
             <Col xs={12} className='m-auto'>
-              <Header user={user} />
+              <Header
+                user={user}
+                products={products}
+                setCategory={this.setCategory}
+              />
               {msgAlerts.map((msgAlert) => (
                 <AutoDismissAlert
                   key={msgAlert.id}
@@ -126,6 +144,7 @@ class App extends Component {
             </Col>
           </Row>
           <main className='container'>
+            <Route />
             <Route
               path='/sign-up'
               render={() => (
@@ -152,8 +171,21 @@ class App extends Component {
               exact
               path='/products'
               // new prop to show only the clicked-on category
-              // category={products.data.category}
-              render={() => <Products msgAlert={this.msgAlert} />}
+              render={() => (
+                <Products msgAlert={this.msgAlert} products={products} />
+              )}
+            />
+            <Route
+              exact
+              path={'/products/' + category}
+              // new prop to show only the clicked-on category
+              render={() => (
+                <Products
+                  msgAlert={this.msgAlert}
+                  products={products}
+                  category={category}
+                />
+              )}
             />
             <Route
               path='/products/:id'
@@ -217,10 +249,7 @@ class App extends Component {
               user={user}
               path='/orders/order-history'
               render={() => (
-                <CompletedOrders
-                  msgAlert={this.msgAlert}
-                  user={user}
-                />
+                <CompletedOrders msgAlert={this.msgAlert} user={user} />
               )}
             />
           </main>

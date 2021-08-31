@@ -19,68 +19,26 @@ const unauthenticatedOptions = (
   </Fragment>
 )
 
-// create dynamic menu that maps each link in the dropdown according to the category from parent props.
-// mapping this:
-
-// const alwaysOptions = (
-//   <Fragment>
-//     <NavLink exact to='/' className='nav-link'>
-//       Home
-//     </NavLink>
-//     <NavDropdown
-//       id='nav-dropdown-dark-example'
-//       title='Products'
-//       menuVariant='dark'
-//       setCategory={setCategory}
-//     >
-//       {categories}
-//       {/* <NavDropdown.Item>
-//         {' '}
-//         <NavLink to='/products' className='nav-link text-dark'>
-//           All Products
-//         </NavLink>
-//       </NavDropdown.Item>
-//       <NavDropdown.Item>
-//         {' '}
-//         <NavLink to='/products/tents' className='nav-link text-dark'>
-//           Tents
-//         </NavLink>
-//       </NavDropdown.Item>
-//       <NavDropdown.Item>
-//         {' '}
-//         <NavLink to='/products/backpacks' className='nav-link text-dark'>
-//           Backpacks
-//         </NavLink>
-//       </NavDropdown.Item>
-//       <NavDropdown.Item>
-//         {' '}
-//         <NavLink to='/products/footwear' className='nav-link text-dark'>
-//           Footwear
-//         </NavLink>
-//       </NavDropdown.Item>
-//       <NavDropdown.Item>
-//         <NavLink
-//           to='/products/camping-accessories'
-//           className='nav-link text-dark'>
-//           Camping Accessories
-//         </NavLink>{' '}
-//       </NavDropdown.Item> */}
-//     </NavDropdown>
-//   </Fragment>
-// )
-
 const Header = ({ user, products, setCategory }) => {
-  const categories = products.map((product) =>
-    <NavDropdown.Item key={product.category}>
+  const menus = []
+  products.forEach((p) => {
+    if (!menus.includes(p.category)) {
+      menus.push(p.category)
+    }
+  })
+  const categories = menus.map((category) => (
+    <NavDropdown.Item key={category}>
       {' '}
       <NavLink
-        to={'/products/' + product.category}
+        to={'/products/' + category}
         className='nav-link text-dark'
-        onClick={() => setCategory(product.category)}
-      >
-        {product.category}
+        onClick={() => setCategory(category)}>
+        {category}
       </NavLink>
-    </NavDropdown.Item>)
+    </NavDropdown.Item>
+  )
+  )
+
   return (
     <Navbar bg='dark' variant='dark' expand='md'>
       <Navbar.Brand>

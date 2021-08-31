@@ -168,15 +168,18 @@ class App extends Component {
               )}
             />
             <Route
-              exact
-              path='/products'
+              exact path='/products'
               // new prop to show only the clicked-on category
               render={() => (
-                <Products msgAlert={this.msgAlert} products={products} />
+                <Products
+                  msgAlert={this.msgAlert}
+                  products={products}
+                  category={category}
+                  setCategory={this.setCategory}
+                />
               )}
             />
             <Route
-              exact
               path={'/products/' + category}
               // new prop to show only the clicked-on category
               render={() => (
@@ -184,6 +187,7 @@ class App extends Component {
                   msgAlert={this.msgAlert}
                   products={products}
                   category={category}
+                  setCategory={this.setCategory}
                 />
               )}
             />

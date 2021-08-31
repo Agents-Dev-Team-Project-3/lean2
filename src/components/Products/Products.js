@@ -1,6 +1,6 @@
 import React from 'react'
 import { withRouter, Link } from 'react-router-dom'
-import { Card, Col, Row } from 'react-bootstrap'
+import { Card, Col, Row, Breadcrumb } from 'react-bootstrap'
 
 const cardImg = {
   margin: 'auto',
@@ -29,14 +29,23 @@ const card = {
   borderRadius: '10px'
 }
 
+const breadcrumbs = {
+  fontSize: '12px',
+  textDecoration: 'none'
+}
+
 const Products = (props) => {
   // coming in from props, from clicking on the dropdown menu
-  const { category, products } = props
+  const { category, products, setCategory } = props
   console.log(category)
 
-  const filteredProducts = products.filter((item) =>
-    item.category === category)
-  console.log(filteredProducts)
+  const filteredProducts = products.filter((item) => {
+    if (category === 'All Products') {
+      return item.category
+    } else {
+      return item.category === category
+    }
+  })
 
   // console.log(products)
 
@@ -59,7 +68,20 @@ const Products = (props) => {
 
   return (
     <Row>
-      <h3 className='text-light'>{category}</h3>
+      <Breadcrumb className='mt-3' style={breadcrumbs}>
+        <Breadcrumb.Item>
+          <Link to={'/'}>
+            home
+          </Link>
+        </Breadcrumb.Item>
+        <Breadcrumb.Item>
+          <Link to={'/products'} onClick={() => setCategory('All Products')}>
+            products
+          </Link>
+        </Breadcrumb.Item>
+        <Breadcrumb.Item>{category}</Breadcrumb.Item>
+      </Breadcrumb>
+      <h3 className='text-light mt-5'>{category}</h3>
       <Col xs={12} style={{ marginTop: '10px' }}>
         <Row>{productList}</Row>
       </Col>

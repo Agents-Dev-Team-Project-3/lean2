@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/lean2/static/css/main.f582019a.chunk.css",
-    "main.js": "/lean2/static/js/main.cfd307ed.chunk.js",
-    "main.js.map": "/lean2/static/js/main.cfd307ed.chunk.js.map",
+    "main.js": "/lean2/static/js/main.3dfb6336.chunk.js",
+    "main.js.map": "/lean2/static/js/main.3dfb6336.chunk.js.map",
     "runtime-main.js": "/lean2/static/js/runtime-main.4bd992a8.js",
     "runtime-main.js.map": "/lean2/static/js/runtime-main.4bd992a8.js.map",
-    "static/js/2.28ef0e39.chunk.js": "/lean2/static/js/2.28ef0e39.chunk.js",
-    "static/js/2.28ef0e39.chunk.js.map": "/lean2/static/js/2.28ef0e39.chunk.js.map",
+    "static/js/2.853886d1.chunk.js": "/lean2/static/js/2.853886d1.chunk.js",
+    "static/js/2.853886d1.chunk.js.map": "/lean2/static/js/2.853886d1.chunk.js.map",
     "index.html": "/lean2/index.html",
     "static/css/main.f582019a.chunk.css.map": "/lean2/static/css/main.f582019a.chunk.css.map",
-    "static/js/2.28ef0e39.chunk.js.LICENSE.txt": "/lean2/static/js/2.28ef0e39.chunk.js.LICENSE.txt",
-    "static/media/lean-2-logo-alt3.d1f634c1.png": "/lean2/static/media/lean-2-logo-alt3.d1f634c1.png"
+    "static/js/2.853886d1.chunk.js.LICENSE.txt": "/lean2/static/js/2.853886d1.chunk.js.LICENSE.txt",
+    "static/media/lean-2-logo-alt2.ba103132.png": "/lean2/static/media/lean-2-logo-alt2.ba103132.png"
   },
   "entrypoints": [
     "static/js/runtime-main.4bd992a8.js",
-    "static/js/2.28ef0e39.chunk.js",
+    "static/js/2.853886d1.chunk.js",
     "static/css/main.f582019a.chunk.css",
-    "static/js/main.cfd307ed.chunk.js"
+    "static/js/main.3dfb6336.chunk.js"
   ]
 }

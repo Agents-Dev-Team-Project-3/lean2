@@ -80,6 +80,12 @@ const Cart = (props) => {
     handleRemoveOne(event)
   }
 
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2
+  })
+
   let total = 0
   const sumTotal = (num) => {
     total += num
@@ -141,7 +147,7 @@ const Cart = (props) => {
   return (
     <div className='row'>
       <div className='col-sm-10 col-md-8 mx-auto mt-5'>
-        <h3 style={{ color: 'white' }}>Order Total: ${total}</h3>
+        <h3 style={{ color: 'white' }}>Order Total: {formatter.format(total)}</h3>
         <Link to='/cart/checkout'>
           <Button style={{ width: '100px', textDecoration: 'none' }} variant="warning">Checkout</Button>
         </Link>

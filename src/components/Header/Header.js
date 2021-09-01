@@ -1,8 +1,7 @@
 import React, { Fragment } from 'react'
-import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/Navbar'
+import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { Link, NavLink } from 'react-router-dom'
-import logo from '../../images/lean-2-logo-alt2.png'
+import logo from '../../images/lean-2-logo-alt3.png'
 
 const authenticatedOptions = (
   <Fragment>
@@ -20,29 +19,100 @@ const unauthenticatedOptions = (
   </Fragment>
 )
 
-const alwaysOptions = (
-  <Fragment>
-    <NavLink exact to='/' className='nav-link'>Home</NavLink>
-    <NavLink to='/products' className='nav-link'>Products</NavLink>
-  </Fragment>
-)
+const Header = ({ user, products, setCategory }) => {
+  const menus = []
+  products.forEach((p) => {
+    if (!menus.includes(p.category)) {
+      menus.push(p.category)
+    }
+  })
+  const categories = menus.map((category) => (
+    <NavDropdown.Item key={category}>
+      {' '}
+      <NavLink
+        to={'/products/' + category}
+        className='nav-link text-dark'
+        onClick={() => setCategory(category)}>
+        {category}
+      </NavLink>
+    </NavDropdown.Item>
+  )
+  )
 
-const Header = ({ user }) => (
-  <Navbar bg='dark' variant='dark' expand='md'>
-    <Navbar.Brand>
-      <Link to='/' style={{ color: '#FFF', textDecoration: 'none', float: 'left !important', marginTop: '-15px !important' }}><img src={logo} style={{ width: '250px', marginLeft: '25px', marginTop: '-7' }}/></Link>
-    </Navbar.Brand>
-    <Navbar.Toggle aria-controls='basic-navbar-nav' />
-    <Navbar.Collapse id='basic-navbar-nav'>
-      <Nav className='ml-auto'>
-        {user && (
-          <span className='navbar-text mr-2'>Welcome, {user.email}</span>
-        )}
-        {alwaysOptions}
-        {user ? authenticatedOptions : unauthenticatedOptions}
-      </Nav>
-    </Navbar.Collapse>
-  </Navbar>
-)
+  return (
+    <Navbar bg='dark' variant='dark' expand='md'>
+      <Navbar.Brand>
+        <Link
+          to='/'
+          style={{
+            color: '#FFF',
+            textDecoration: 'none',
+            float: 'left !important',
+            marginTop: '-15px !important'
+          }}>
+          <img
+            src={logo}
+            style={{ width: '250px', marginLeft: '25px', marginTop: '-7' }}
+          />
+        </Link>
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls='basic-navbar-nav' />
+      <Navbar.Collapse id='basic-navbar-nav'>
+        <Nav className='ml-auto'>
+          {user && (
+            <span className='navbar-text mr-2'>Welcome, {user.email}</span>
+          )}
+
+          <Fragment>
+            <NavLink exact to='/' className='nav-link'>
+              Home
+            </NavLink>
+            <NavDropdown
+              id='nav-dropdown-dark-example'
+              title='Products'
+              menuVariant='dark'
+            >
+              {categories}
+              {/* <NavDropdown.Item>
+                {' '}
+                <NavLink to='/products' className='nav-link text-dark'>
+                  All Products
+                </NavLink>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                {' '}
+                <NavLink to='/products/tents' className='nav-link text-dark'>
+                  Tents
+                </NavLink>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                {' '}
+                <NavLink to='/products/backpacks' className='nav-link text-dark'>
+                  Backpacks
+                </NavLink>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                {' '}
+                <NavLink to='/products/footwear' className='nav-link text-dark'>
+                  Footwear
+                </NavLink>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <NavLink
+                  to='/products/camping-accessories'
+                  className='nav-link text-dark'>
+                  Camping Accessories
+                </NavLink>{' '}
+              </NavDropdown.Item> */}
+            </NavDropdown>
+          </Fragment>
+
+          {/* {alwaysOptions} */}
+          {user ? authenticatedOptions : unauthenticatedOptions}
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  )
+}
 
 export default Header

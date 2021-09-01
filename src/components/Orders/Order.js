@@ -100,7 +100,7 @@ const Cart = (props) => {
           <Card.Text>Price: ${item.product.price}</Card.Text>
           <Card.Text>Quantity: {item.quantity}</Card.Text>
           <Card.Text>
-            Subtotal: {formatter.format((item.quantity * item.product.price))}
+            Subtotal: ${Math.round((item.quantity * item.product.price) * 100) / 100}
           </Card.Text>
           {sumTotal(item.quantity * item.product.price)}
           <Button

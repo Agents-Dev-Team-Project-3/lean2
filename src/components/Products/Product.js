@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { withRouter } from 'react-router-dom'
-import { Button, Card, Row, Col } from 'react-bootstrap'
+import { withRouter, Link } from 'react-router-dom'
+import { Button, Card, Row, Col, Breadcrumb } from 'react-bootstrap'
 import { showProduct } from '../../api/products'
 import { updateOrder, showOrder } from '../../api/orders'
 import {
@@ -10,7 +10,7 @@ import {
 
 const card = {
   border: 'none',
-  borderRadius: '10px'
+  borderRadius: '0px'
 }
 
 const cardImg = {
@@ -26,12 +26,12 @@ const cardTitle = {
 
 const cardCol = {
   margin: 'auto',
-  marginTop: '10px'
+  marginTop: '60px'
 }
 
 const cardBody = {
   backgroundColor: 'grey',
-  borderRadius: '0px 0px 8px 8px',
+  borderRadius: '0px',
   color: 'white'
 }
 
@@ -39,9 +39,14 @@ const button = {
   width: 'inherit'
 }
 
+const breadcrumbs = {
+  fontSize: '12px',
+  textDecoration: 'none'
+}
+
 const Products = (props) => {
   const [product, setProduct] = useState(null)
-  const { order, user, setOrder, msgAlert } = props
+  const { order, user, setOrder, msgAlert, setCategory } = props
 
   useEffect(() => {
     showProduct(props.match.params.id)
@@ -105,16 +110,31 @@ const Products = (props) => {
     return <p>Loading...</p>
   }
 
-  const { name, image, description, price } = product
+  const { name, image, description, price, category } = product
   // const secondary = 'Secondary'
   return (
     <Row>
+      <Breadcrumb className='mt-3' style={breadcrumbs}>
+        <Breadcrumb.Item>
+          <Link to={'/'}>home</Link>
+        </Breadcrumb.Item>
+        <Breadcrumb.Item>
+          <Link to={'/products'} onClick={() => setCategory('All Products')}>
+            products
+          </Link>
+        </Breadcrumb.Item>
+        <Breadcrumb.Item>
+          <Link to={'/products/' + category} onClick={() => setCategory(category)}>
+            {category}
+          </Link>
+        </Breadcrumb.Item>
+        <Breadcrumb.Item>
+          {name}
+        </Breadcrumb.Item>
+      </Breadcrumb>
       <Col xs={10} md={8} style={cardCol}>
-        <Card
-          style={card}
-          className="m-auto"
-        >
-          <Card.Img variant='top' src={`${image}`} style={cardImg}/>
+        <Card style={card} className='m-auto'>
+          <Card.Img variant='top' src={`${image}`} style={cardImg} />
           <Card.Body style={cardBody}>
             <Card.Title style={cardTitle}>{name}</Card.Title>
             <Card.Text>{description}</Card.Text>

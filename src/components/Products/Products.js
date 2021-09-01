@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { withRouter, Link } from 'react-router-dom'
-import { Card, Col, Row, Breadcrumb } from 'react-bootstrap'
+import { Card, Col, Row } from 'react-bootstrap'
+
+import { index } from '../../api/products'
 
 const cardImg = {
   margin: 'auto',
@@ -29,27 +31,22 @@ const card = {
   borderRadius: '10px'
 }
 
-const breadcrumbs = {
-  fontSize: '12px',
-  textDecoration: 'none'
-}
-
 const Products = (props) => {
-  // coming in from props, from clicking on the dropdown menu
-  const { category, products, setCategory } = props
-  console.log(category)
+  const [products, setProducts] = useState([])
 
-  const filteredProducts = products.filter((item) => {
-    if (category === 'All Products') {
-      return item.category
-    } else {
-      return item.category === category
-    }
-  })
+  useEffect(() => {
+    index()
+      .then((res) => setProducts(res.data.products))
+      .catch(console.error)
+  }, [])
 
-  // console.log(products)
+  // const productList = products.map((product) => (
+  //   <li key={product._id}>
+  //     <Link to={`/products/${product._id}`}>{product.name}</Link>
+  //   </li>
+  // ))
 
-  const productList = filteredProducts.map((item) => (
+  const productList = products.map((item) => (
     <Col xs={12} md={6} lg={4} xl={4} key={item._id} style={cardCol}>
       <Card style={card} className='m-auto'>
         <Link style={{ margin: 'auto' }} to={`/products/${item._id}`}>
@@ -68,20 +65,7 @@ const Products = (props) => {
 
   return (
     <Row>
-      <Breadcrumb className='mt-3' style={breadcrumbs}>
-        <Breadcrumb.Item>
-          <Link to={'/'}>
-            home
-          </Link>
-        </Breadcrumb.Item>
-        <Breadcrumb.Item>
-          <Link to={'/products'} onClick={() => setCategory('All Products')}>
-            products
-          </Link>
-        </Breadcrumb.Item>
-        <Breadcrumb.Item>{category}</Breadcrumb.Item>
-      </Breadcrumb>
-      <h3 className='text-light mt-5'>{category}</h3>
+      <h3 className='text-light'>Products</h3>
       <Col xs={12} style={{ marginTop: '10px' }}>
         <Row>{productList}</Row>
       </Col>

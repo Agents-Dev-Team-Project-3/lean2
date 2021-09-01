@@ -99,7 +99,7 @@ export default function CheckoutForm (props) {
 
   return (
     <div id='checkout'>
-      <form id="payment-form" onSubmit={handleSubmit}>
+      <form style={{ width: '400px' }} id="payment-form" onSubmit={handleSubmit}>
         <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
         <button
           disabled={processing || disabled || succeeded}

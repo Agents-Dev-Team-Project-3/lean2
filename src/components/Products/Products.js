@@ -15,7 +15,8 @@ const cardCol = {
 }
 
 const cardTitle = {
-  height: '50px'
+  height: '50px',
+  fontSize: '16px'
 }
 
 const cardBody = {
@@ -81,7 +82,7 @@ const Products = (props) => {
         </Breadcrumb.Item>
         <Breadcrumb.Item>{category}</Breadcrumb.Item>
       </Breadcrumb>
-      <h3 className='text-light mt-5'>{category}</h3>
+      <h4 className='text-light mt-5'>{category}</h4>
       <Col xs={12} style={{ marginTop: '10px' }}>
         <Row>{productList}</Row>
       </Col>

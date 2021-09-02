@@ -21,7 +21,8 @@ const cardImg = {
 }
 
 const cardTitle = {
-  height: '50px'
+  height: '50px',
+  fontSize: '16px'
 }
 
 const cardCol = {

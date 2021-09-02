@@ -1,19 +1,56 @@
 import React from 'react'
 import { withRouter, Link } from 'react-router-dom'
-import { Button, Card } from 'react-bootstrap'
+import { Button, Card, ListGroup } from 'react-bootstrap'
 import { updateOrder, showOrder } from '../../api/orders'
 
 // import { index } from '../../api/products'
 
-const button = {
-  width: 'inherit'
+const increment = {
+  borderRadius: '25%',
+  width: '28px',
+  padding: 'unset',
+  paddingRight: '8px',
+  paddingLeft: '8px',
+  // height: '20px',
+  lineHeight: 'unset',
+  fontFamily: 'monospace',
+  backgroundColor: '#cfd0d3',
+  position: 'relative',
+  bottom: '2px'
+  // verticalAlign: 'middle'
 }
 
-const card = {
+const quantity = {
+  display: 'inline-block',
+  textAlign: 'center',
+  border: 'solid #cfd0d3 0.5px',
+  borderRadius: '15%',
+  width: '30px'
+}
+
+const remove = {
+  width: '125px',
+  marginLeft: '10px',
+  background: 'none',
+  color: 'red',
+  border: 'solid red 1px'
+}
+
+const image = {
   display: 'inline-block',
   margin: 'auto',
-  width: '75%',
+  width: '20%',
   padding: '25px'
+}
+
+const cartInfo = {
+  display: 'inline',
+  marginBottom: '15px'
+}
+
+const header = {
+  backgroundColor: '#cfd0d3',
+  borderTop: 'solid grey'
 }
 
 const Cart = (props) => {
@@ -91,68 +128,104 @@ const Cart = (props) => {
     total += num
   }
 
+  const cardHeader =
+    <Card.Header style={header}>
+      <div
+        style={{
+          display: 'inline-block',
+          width: '50%'
+        }}>
+        Item
+      </div>
+      <div
+        style={{
+          display: 'inline-block',
+          width: '20%'
+        }}>
+        Quantity
+      </div>
+      <div
+        style={{
+          display: 'inline-block',
+          width: '15%'
+        }}>
+        Item Price
+      </div>
+      <div
+        style={{
+          display: 'inline-block',
+          width: '15%'
+        }}>
+        SubTotal
+      </div>
+    </Card.Header>
+
   const cartContent = order.contents.map((item) => (
-    <div key={item.product._id} className='col-3 mt-5'>
-      <Card style={{ width: '25rem' }} className='m-auto'>
-        <Card.Img variant='top' src={`${item.product.image}`} style={card} />
-        <Card.Body>
-          <Card.Title>{item.product.name}</Card.Title>
-          <Card.Text>Price: ${item.product.price}</Card.Text>
-          <Card.Text>Quantity: {item.quantity}</Card.Text>
-          <Card.Text>
-            Subtotal: ${Math.round((item.quantity * item.product.price) * 100) / 100}
-          </Card.Text>
-          {sumTotal(item.quantity * item.product.price)}
+    <ListGroup key={item.product._id} style={cartInfo}>
+      {cardHeader}
+      <ListGroup.Item style={{ border: 'none' }}>
+        <div style={{ display: 'block' }}>
+          <Card.Img src={`${item.product.image}`} style={image} />
+          {item.product.name}
+        </div>
+        <span style={{ display: 'inline-block', width: '50%' }}>
           <Button
-            style={button}
-            value={item.product._id}
-            onClick={handleRemoveOne}
-            variant='secondary'>
-            -
-          </Button>{' '}
-          <Button
-            style={button}
-            value={item.product._id}
-            onClick={handleAddOne}
-            variant='secondary'>
-            +
-          </Button>{' '}
-          <Button
-            style={button}
+            style={remove}
             value={item.product._id}
             onClick={handleRemoveAll}
             variant='secondary'>
-            Remove All
+            Delete
           </Button>{' '}
-        </Card.Body>
-      </Card>
-    </div>
-
-    // <ul key={item.product._id}>
-    //   <li>{item.product.name}</li>
-    //   <li>
-    //     <img src={`${item.product.image}`} width='200px'></img>
-    //   </li>
-    //   <li>Description: {item.product.description}</li>
-    //   <li>Quantity: {item.quantity}</li>
-    //   <li>Price: ${item.product.price}</li>
-    //   <li>Subtotal: ${item.quantity * item.product.price}</li>
-    //   {sumTotal((item.quantity * item.product.price))}
-    //   <Button style={button} value={item.product._id} onClick={handleRemove} variant='success'>-</Button>{' '}
-    //   <Button style={button} value={item.product._id} onClick={handleAddOne} variant='success'>+</Button>{' '}
-    //   <Button style={button} value={item.product._id} onClick={handleRemoveAll} variant='success'>Remove All</Button>{' '}
-    // </ul>
+        </span>
+        <span style={{ display: 'inline-block', width: '20%' }}>
+          {' '}
+          <Button
+            style={increment}
+            value={item.product._id}
+            onClick={handleRemoveOne}
+            variant='light'>
+            -
+          </Button>{' '}
+          <div style={quantity}>{item.quantity}</div>{' '}
+          <Button
+            style={increment}
+            value={item.product._id}
+            onClick={handleAddOne}
+            variant='light'>
+            +
+          </Button>{' '}
+        </span>
+        <span style={{ display: 'inline-block', width: '15%' }}>
+          {' '}
+          ${item.product.price}
+        </span>
+        <span style={{ display: 'inline-block', width: '15%' }}>
+          {formatter.format((item.quantity * item.product.price * 100) / 100)}
+        </span>{' '}
+        {sumTotal(item.quantity * item.product.price)}
+      </ListGroup.Item>
+    </ListGroup>
   ))
 
   return (
     <div className='row'>
       <div className='col-sm-10 col-md-8 mx-auto mt-5'>
-        <h3 style={{ color: 'white' }}>Order Total: {formatter.format(total)}</h3>
+        <h3 style={{ color: 'white' }}>
+          Order Total: {formatter.format(total)}
+        </h3>
         <Link to='/cart/checkout'>
-          <Button style={{ width: '100px', textDecoration: 'none' }} variant="warning">Checkout</Button>
+          <Button
+            style={{ width: '100px', textDecoration: 'none' }}
+            variant='warning'>
+            Checkout
+          </Button>
         </Link>
         <row>
-          {cartContent}
+          <div className='col-3 mt-5'>
+            <Card style={{ width: '40rem', border: 'none' }} className='m-auto'>
+              <ListGroup>{cartContent}</ListGroup>
+            </Card>
+          </div>
         </row>
       </div>
     </div>

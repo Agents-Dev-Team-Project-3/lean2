@@ -45,12 +45,13 @@ const image = {
 
 const cartInfo = {
   display: 'inline',
-  marginBottom: '15px'
+  paddingBottom: '10px',
+  borderBottom: 'solid 1px grey',
+  borderRadius: '0'
 }
 
 const header = {
-  backgroundColor: '#cfd0d3',
-  borderTop: 'solid grey'
+  backgroundColor: '#cfd0d3'
 }
 
 const Cart = (props) => {
@@ -133,14 +134,16 @@ const Cart = (props) => {
       <div
         style={{
           display: 'inline-block',
-          width: '50%'
-        }}>
-        Item
+          width: '50%',
+          paddingLeft: '45px'
+        }}>Item
       </div>
       <div
         style={{
           display: 'inline-block',
-          width: '20%'
+          width: '20%',
+          paddingLeft: '15px'
+
         }}>
         Quantity
       </div>
@@ -149,7 +152,7 @@ const Cart = (props) => {
           display: 'inline-block',
           width: '15%'
         }}>
-        Item Price
+        Unit Price
       </div>
       <div
         style={{
@@ -162,7 +165,6 @@ const Cart = (props) => {
 
   const cartContent = order.contents.map((item) => (
     <ListGroup key={item.product._id} style={cartInfo}>
-      {cardHeader}
       <ListGroup.Item style={{ border: 'none' }}>
         <div style={{ display: 'block' }}>
           <Card.Img src={`${item.product.image}`} style={image} />
@@ -209,7 +211,7 @@ const Cart = (props) => {
 
   return (
     <div className='row'>
-      <div className='col-sm-10 col-md-8 mx-auto mt-5'>
+      <div className='col-sm-12 col-md-10 col-lg-8 mx-auto mt-5'>
         <h3 style={{ color: 'white' }}>
           Order Total: {formatter.format(total)}
         </h3>
@@ -221,8 +223,9 @@ const Cart = (props) => {
           </Button>
         </Link>
         <row>
-          <div className='col-3 mt-5'>
-            <Card style={{ width: '40rem', border: 'none' }} className='m-auto'>
+          <div className='col-12 mt-5'>
+            <Card style={{ border: 'none' }} className='m-auto'>
+              {cardHeader}
               <ListGroup>{cartContent}</ListGroup>
             </Card>
           </div>
